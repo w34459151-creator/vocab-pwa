@@ -1,0 +1,9 @@
+{
+  "name": "vocab-pwa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "词力 · 每日英语练习 PWA（GitHub Pages 部署）",
+  "scripts": {
+    "deploy": "gh-pages -d . -b gh-pages -t true --no-history"
+  }
+}
