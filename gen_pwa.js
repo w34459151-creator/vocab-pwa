@@ -7,6 +7,11 @@ const outPath = path.join(__dirname, "data.js");
 
 const vocab = JSON.parse(fs.readFileSync(vocabPath, 'utf8'));
 
+// OAuth Device Flow 的 Client ID（来自本地配置 ~/.workbuddy/vocab-oauth.json），公开值非密钥
+let GH_CLIENT_ID = '';
+const oauthCfgPath = path.join(HOME, 'vocab-oauth.json');
+try { if (fs.existsSync(oauthCfgPath)) { const o = JSON.parse(fs.readFileSync(oauthCfgPath, 'utf8')); if (o && o.client_id) GH_CLIENT_ID = String(o.client_id).trim(); } } catch (e) {}
+
 const LIB = (vocab.words || []).map(d => ({
   w: d.word,
   p: d.phonetic || '',
@@ -27,8 +32,9 @@ const VER = (swSrc.match(/vocabpwa-v(\d+)/) || [])[1] || '?';
 const out =
   '// 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json\n' +
   'window.VOCAB_VERSION = ' + JSON.stringify(VER) + ';\n' +
+  (GH_CLIENT_ID ? 'window.GH_CLIENT_ID = ' + JSON.stringify(GH_CLIENT_ID) + ';\n' : '') +
   'window.VOCAB_LIB = ' + JSON.stringify(LIB, null, 2) + ';\n' +
   'window.VOCAB_SCHED = ' + JSON.stringify(SCHED, null, 2) + ';\n';
 
 fs.writeFileSync(outPath, out, 'utf8');
-console.log('OK 生成 data.js：词', LIB.length, '｜ 日程日期', Object.keys(SCHED).length, '个｜ 版本 v' + VER);
+console.log('OK 生成 data.js：词', LIB.length, '｜ 日程日期', Object.keys(SCHED).length, '个｜ 版本 v' + VER + (GH_CLIENT_ID ? '｜ OAuth 已配置' : '｜ OAuth 未配置'));

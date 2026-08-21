@@ -226,13 +226,27 @@
     <button class="tbtn" onclick="chGoal(-1)">−</button><b id="sg">5</b><button class="tbtn" onclick="chGoal(1)">＋</button></div></div>
   <div class="setrow"><span>严格清零（断签即 0）</span><input type="checkbox" id="strictCb" onchange="toggleStrict(this.checked)"></div>
   <div class="setrow"><span>答对音效 + 动画</span><input type="checkbox" id="soundCb" onchange="toggleSound(this.checked)"></div>
-  <div class="setrow col"><span>📤 自动回传（GitHub Token，填一次即可）</span>
-    <input class="typebox" id="ghTokInp" type="password" placeholder="github_pat_… 仅授权 vocab-pwa 仓库 Contents 读写" style="margin:4px 0 8px">
-    <div style="display:flex;gap:8px">
+  <div class="setrow col"><span>📤 自动回传</span>
+    <div class="syncstat" id="ghTokStatus">未配置：未连接 GitHub（点击下方按钮在电脑上完成授权）</div>
+    <div style="display:flex;gap:8px;margin:6px 0">
+      <button class="bigbtn" id="ghConnectBtn" onclick="connectGitHub()">🔗 连接 GitHub</button>
+      <button class="bigbtn ghost" id="ghDiscBtn" onclick="disconnectGitHub()" style="display:none">断开</button>
+    </div>
+    <div id="ghDeviceBox" style="display:none;margin-top:8px;background:var(--soft);border:1px solid #dbeafe;border-radius:10px;padding:12px">
+      <div style="font-weight:700;color:var(--accent);margin-bottom:6px">在电脑上完成授权（推荐在电脑浏览器打开）</div>
+      <div style="font-size:13px;margin-bottom:8px">打开 <a href="https://github.com/login/device" target="_blank" rel="noopener" style="color:var(--accent)">github.com/login/device</a>，输入以下 8 位代码：</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+        <code id="ghUserCode" style="font-size:22px;font-weight:800;letter-spacing:2px;background:#fff;padding:8px 14px;border-radius:8px;border:1px solid var(--line);user-select:all">--------</code>
+        <button class="tbtn" onclick="copyUserCode()">复制</button>
+      </div>
+      <div class="syncstat" id="ghDeviceStatus">等待中…（15 分钟内有效）</div>
+    </div>
+    <details style="margin-top:8px">
+      <summary style="font-size:13px;color:var(--sub);cursor:pointer">已有 Token？手动粘贴（高级）</summary>
+      <input class="typebox" id="ghTokInp" type="password" placeholder="github_pat_… 或 gho_…" style="margin:6px 0">
       <button class="bigbtn" onclick="saveGHToken()">保存</button>
       <button class="bigbtn ghost" onclick="testGHToken()">测试</button>
-    </div>
-    <div class="syncstat" id="ghTokStatus">未配置：练完需手动复制结果回传</div>
+    </details>
   </div>
   <div class="btnrow"><button class="bigbtn" onclick="backHome()">完成</button></div>
 </div>
@@ -603,6 +617,11 @@ function openSettings(){
   document.getElementById('strictCb').checked=strictMode;
   document.getElementById('soundCb').checked=soundOn;
   const ti=document.getElementById('ghTokInp'); if(ti) ti.value=GH_TOKEN;
+  const btn=document.getElementById('ghConnectBtn'), disc=document.getElementById('ghDiscBtn'), st=document.getElementById('ghTokStatus');
+  if(btn && disc){
+    if(GH_TOKEN){ btn.style.display='none'; disc.style.display='inline-block'; if(st){st.textContent='✅ 已连接 GitHub（手机端零粘贴，自动同步）'; st.className='syncstat ok';} }
+    else { btn.style.display='inline-block'; disc.style.display='none'; if(st){st.textContent=GH_CLIENT_ID?'未连接（点击下方按钮在电脑上完成授权）':'❌ 未配置 OAuth App Client ID（请让 AI 重新部署）'; st.className=GH_CLIENT_ID?'syncstat':'syncstat no';} }
+  }
   showPanel('setPanel');
 }
 function chGoal(d){ dailyGoal=Math.max(5,Math.min(30,dailyGoal+d)); saveMeta(); document.getElementById('sg').textContent=dailyGoal; refreshTop(); }
@@ -627,6 +646,7 @@ async function importLib(e){
 
 /* ===== 自动回传（GitHub Contents API，octokit 同款 REST；token 仅存本机 IndexedDB） ===== */
 const GH_OWNER='w34459151-creator', GH_REPO='vocab-pwa', GH_BRANCH='master';
+const GH_CLIENT_ID = (window.GH_CLIENT_ID || '').trim();
 let GH_TOKEN='';
 async function loadGHToken(){ try{const t=await dbGet('gh_token'); if(t) GH_TOKEN=t;}catch(e){} }
 function b64u(s){
@@ -662,6 +682,100 @@ async function testGHToken(){
     if(r.ok){ const j=await r.json(); st.textContent='✅ 连接成功：'+(j.login||'ok'); st.className='syncstat ok'; }
     else { st.textContent='❌ HTTP '+r.status+'（Token 无效或权限不足）'; st.className='syncstat no'; }
   }catch(e){ st.textContent='❌ 网络错误：'+(e&&e.message||e); st.className='syncstat no'; }
+}
+
+/* ===== OAuth Device Flow（GitHub 标准，手机端零粘贴） ===== */
+let ghDeviceTimer = null, ghDeviceExpires = 0;
+async function connectGitHub(){
+  const st=document.getElementById('ghTokStatus');
+  const box=document.getElementById('ghDeviceBox');
+  const btn=document.getElementById('ghConnectBtn');
+  if(!GH_CLIENT_ID){ if(st){st.textContent='❌ 尚未配置 OAuth App Client ID（请在桌面创建 OAuth App 后让我重新部署）'; st.className='syncstat no';} return; }
+  if(st){ st.textContent='正在获取设备码…'; st.className='syncstat'; }
+  let resp;
+  try{
+    resp = await fetch('https://github.com/login/device/code',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({client_id: GH_CLIENT_ID, scope: 'repo'})
+    });
+  }catch(e){ if(st){st.textContent='❌ 网络错误：'+(e.message||e); st.className='syncstat no';} return; }
+  if(!resp.ok){ if(st){st.textContent='❌ 获取设备码失败 HTTP '+resp.status+'（检查 OAuth App 是否启用 Device Flow）'; st.className='syncstat no';} return; }
+  const v = await resp.json();
+  document.getElementById('ghUserCode').textContent = v.user_code;
+  box.style.display='block';
+  btn.disabled=true; btn.textContent='等待授权…';
+  if(st){ st.textContent='已生成设备码，请按下方提示完成授权'; st.className='syncstat'; }
+  ghDeviceExpires = Date.now() + (v.expires_in*1000);
+  let interval = v.interval || 5;
+  const poll = async () => {
+    if(Date.now() > ghDeviceExpires){ finishDeviceFail('设备码已过期，请重新点击连接'); return; }
+    let r, j;
+    try{
+      r = await fetch('https://github.com/login/oauth/access_token',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify({
+          client_id: GH_CLIENT_ID,
+          device_code: v.device_code,
+          grant_type: 'urn:ietf:params:oauth:grant-type:device_code'
+        })
+      });
+      j = await r.json();
+    }catch(e){ ghDeviceTimer = setTimeout(poll, interval*1000); return; }
+    if(r.ok && j.access_token){
+      await dbSet('gh_token', j.access_token);
+      GH_TOKEN = j.access_token;
+      finishDeviceOk();
+      return;
+    }
+    const err = j && j.error;
+    if(err === 'authorization_pending'){
+      document.getElementById('ghDeviceStatus').textContent='等待你在电脑上完成授权…';
+    } else if(err === 'slow_down'){
+      interval += 5;
+      document.getElementById('ghDeviceStatus').textContent='请稍候…';
+    } else if(err === 'expired_token'){
+      finishDeviceFail('设备码已过期，请重新点击连接'); return;
+    } else if(err === 'access_denied'){
+      finishDeviceFail('你拒绝了授权'); return;
+    } else {
+      finishDeviceFail('授权失败：'+(err||r.status)); return;
+    }
+    ghDeviceTimer = setTimeout(poll, interval*1000);
+  };
+  document.getElementById('ghDeviceStatus').textContent='等待你在电脑上完成授权…';
+  ghDeviceTimer = setTimeout(poll, interval*1000);
+}
+function finishDeviceOk(){
+  clearTimeout(ghDeviceTimer); ghDeviceTimer=null;
+  document.getElementById('ghDeviceBox').style.display='none';
+  const btn=document.getElementById('ghConnectBtn'), disc=document.getElementById('ghDiscBtn');
+  if(btn) btn.style.display='none';
+  if(disc) disc.style.display='inline-block';
+  const st=document.getElementById('ghTokStatus'); if(st){ st.textContent='✅ 已连接 GitHub（手机端免任何后续操作）'; st.className='syncstat ok'; }
+}
+function finishDeviceFail(msg){
+  clearTimeout(ghDeviceTimer); ghDeviceTimer=null;
+  document.getElementById('ghDeviceBox').style.display='none';
+  const btn=document.getElementById('ghConnectBtn');
+  if(btn){ btn.disabled=false; btn.textContent='🔗 连接 GitHub'; }
+  const st=document.getElementById('ghTokStatus'); if(st){ st.textContent='❌ '+(msg||'失败'); st.className='syncstat no'; }
+}
+async function disconnectGitHub(){
+  GH_TOKEN='';
+  try{ await dbSet('gh_token',''); }catch(e){}
+  const btn=document.getElementById('ghConnectBtn'), disc=document.getElementById('ghDiscBtn');
+  if(btn){ btn.style.display='inline-block'; btn.disabled=false; btn.textContent='🔗 连接 GitHub'; }
+  if(disc) disc.style.display='none';
+  const st=document.getElementById('ghTokStatus'); if(st){ st.textContent='未配置：未连接 GitHub'; st.className='syncstat'; }
+}
+function copyUserCode(){
+  const c=document.getElementById('ghUserCode').textContent;
+  try{ navigator.clipboard.writeText(c); }catch(e){
+    const ta=document.createElement('textarea'); ta.value=c; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');}catch(e){} ta.remove();
+  }
+  const st=document.getElementById('ghDeviceStatus'); if(st) st.textContent='已复制代码 '+c;
 }
 
 /* ===== 口语练习（单词跟读 / 句子分场景） ===== */
