@@ -1,4 +1,4 @@
-const CACHE = 'vocabpwa-v7';
+const CACHE = 'vocabpwa-v8';
 const ASSETS = ['./', './index.html', './data.js', './manifest.webmanifest', './icon.svg'];
 
 self.addEventListener('install', e => {
