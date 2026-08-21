@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "10";
+window.VOCAB_VERSION = "11";
 window.VOCAB_LIB = [
   {
     "w": "switch",

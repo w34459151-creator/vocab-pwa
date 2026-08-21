@@ -109,6 +109,10 @@
   .setrow b{color:var(--accent);margin:0 10px;font-size:16px}
   .setrow input[type=checkbox]{width:22px;height:22px}
   #setPanel h2{font-size:16px;margin:0 0 12px}
+  .setrow.col{flex-direction:column;align-items:stretch}
+  .syncstat{font-size:12.5px;color:var(--sub);margin-top:4px}
+  .syncstat.ok{color:var(--ok)}
+  .syncstat.no{color:var(--bad)}
   /* 口语 / 拍照 */
   .tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
   .tab{padding:7px 14px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:13px;color:var(--ink)}
@@ -207,6 +211,7 @@
   <div id="resultList"></div>
   <div style="font-weight:700;margin:14px 0 4px">📋 结果串（复制发我，我来写进度）</div>
   <textarea id="result" readonly></textarea>
+  <div class="syncstat" id="syncStatus"></div>
   <button class="copybtn" onclick="copyResult()">复制结果</button>
   <div class="btnrow">
     <button class="bigbtn ghost" onclick="restart()">↻ 再练一轮</button>
@@ -221,6 +226,14 @@
     <button class="tbtn" onclick="chGoal(-1)">−</button><b id="sg">5</b><button class="tbtn" onclick="chGoal(1)">＋</button></div></div>
   <div class="setrow"><span>严格清零（断签即 0）</span><input type="checkbox" id="strictCb" onchange="toggleStrict(this.checked)"></div>
   <div class="setrow"><span>答对音效 + 动画</span><input type="checkbox" id="soundCb" onchange="toggleSound(this.checked)"></div>
+  <div class="setrow col"><span>📤 自动回传（GitHub Token，填一次即可）</span>
+    <input class="typebox" id="ghTokInp" type="password" placeholder="github_pat_… 仅授权 vocab-pwa 仓库 Contents 读写" style="margin:4px 0 8px">
+    <div style="display:flex;gap:8px">
+      <button class="bigbtn" onclick="saveGHToken()">保存</button>
+      <button class="bigbtn ghost" onclick="testGHToken()">测试</button>
+    </div>
+    <div class="syncstat" id="ghTokStatus">未配置：练完需手动复制结果回传</div>
+  </div>
   <div class="btnrow"><button class="bigbtn" onclick="backHome()">完成</button></div>
 </div>
 
@@ -568,6 +581,14 @@ async function qScore(){
   });
   const result={date:todayStr(), level:qLevel, range:RANGE, reviewCompleted:right, wrongAnswers:wrong};
   document.getElementById('result').value=JSON.stringify(result);
+  const sync=await autoSyncResult(result);
+  const se=document.getElementById('syncStatus');
+  if(se){
+    if(sync.ok) se.textContent='✅ 已自动回传，AI 稍后自动合并进度';
+    else if(sync.reason==='not-configured') se.textContent='⚠️ 未配置自动回传 Token，请复制结果发我';
+    else se.textContent='⚠️ 自动回传失败（'+sync.reason+'），请复制结果发我';
+    se.className='syncstat '+(sync.ok?'ok':'no');
+  }
   await onSessionDone();
   showPanel('pReport');
 }
@@ -581,6 +602,7 @@ function openSettings(){
   document.getElementById('sg').textContent=dailyGoal;
   document.getElementById('strictCb').checked=strictMode;
   document.getElementById('soundCb').checked=soundOn;
+  const ti=document.getElementById('ghTokInp'); if(ti) ti.value=GH_TOKEN;
   showPanel('setPanel');
 }
 function chGoal(d){ dailyGoal=Math.max(5,Math.min(30,dailyGoal+d)); saveMeta(); document.getElementById('sg').textContent=dailyGoal; refreshTop(); }
@@ -601,6 +623,45 @@ async function importLib(e){
     alert('词库已导入（'+words.length+' 词），已覆盖本地数据。');
     location.reload();
   }catch(err){alert('导入失败：'+err.message);}
+}
+
+/* ===== 自动回传（GitHub Contents API，octokit 同款 REST；token 仅存本机 IndexedDB） ===== */
+const GH_OWNER='w34459151-creator', GH_REPO='vocab-pwa', GH_BRANCH='master';
+let GH_TOKEN='';
+async function loadGHToken(){ try{const t=await dbGet('gh_token'); if(t) GH_TOKEN=t;}catch(e){} }
+function b64u(s){
+  if(typeof TextEncoder!=='undefined'){ const b=new TextEncoder().encode(s); let bin='';
+    for(let i=0;i<b.length;i++) bin+=String.fromCharCode(b[i]); return btoa(bin); }
+  return btoa(unescape(encodeURIComponent(s)));
+}
+async function autoSyncResult(result){
+  if(!GH_TOKEN) return {ok:false, reason:'not-configured'};
+  const p='sync/'+todayStr()+'-'+Date.now()+'.json';
+  try{
+    const r=await fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+p,{
+      method:'PUT',
+      headers:{'Authorization':'Bearer '+GH_TOKEN,'Content-Type':'application/json','Accept':'application/vnd.github+json'},
+      body:JSON.stringify({message:'sync result from 词力 PWA', content:b64u(JSON.stringify(result)), branch:GH_BRANCH})
+    });
+    return r.ok ? {ok:true, path:p} : {ok:false, reason:'HTTP '+r.status};
+  }catch(e){ return {ok:false, reason:(e&&e.message)||String(e)}; }
+}
+function saveGHToken(){
+  const inp=document.getElementById('ghTokInp'); const st=document.getElementById('ghTokStatus');
+  const v=(inp.value||'').trim();
+  if(!v){ if(st){st.textContent='请输入 Token'; st.className='syncstat no';} return; }
+  GH_TOKEN=v;
+  dbSet('gh_token', v).then(()=>{ if(st){st.textContent='已保存 ✅ Token 仅存本机，练完自动回传'; st.className='syncstat ok';} });
+}
+async function testGHToken(){
+  const st=document.getElementById('ghTokStatus'); if(!st) return;
+  if(!GH_TOKEN){ st.textContent='请先输入并保存 Token'; st.className='syncstat no'; return; }
+  st.textContent='测试中…'; st.className='syncstat';
+  try{
+    const r=await fetch('https://api.github.com/user',{headers:{'Authorization':'Bearer '+GH_TOKEN,'Accept':'application/vnd.github+json'}});
+    if(r.ok){ const j=await r.json(); st.textContent='✅ 连接成功：'+(j.login||'ok'); st.className='syncstat ok'; }
+    else { st.textContent='❌ HTTP '+r.status+'（Token 无效或权限不足）'; st.className='syncstat no'; }
+  }catch(e){ st.textContent='❌ 网络错误：'+(e&&e.message||e); st.className='syncstat no'; }
 }
 
 /* ===== 口语练习（单词跟读 / 句子分场景） ===== */
@@ -806,6 +867,7 @@ window.__h={
   get LIB(){return LIB}, get LIBMAP(){return LIBMAP}, get QUIZ(){return QUIZ}, get qcur(){return qcur},
   get DATA(){return DATA}, get streak(){return streak}, get dailyGoal(){return dailyGoal},
   get pendingAdd(){return pendingAdd}, get photoTokens(){return photoTokens},
+  setGHToken(t){GH_TOKEN=t||'';}, getGHToken(){return GH_TOKEN;}, autoSyncResult, b64u,
   goLevel, setRange, renderQuiz, backHome, openSettings, qChoose, qNext, qSubmit, qPrev, setRate, importLib,
   parseImportText, extractEnglish, showPhotoTokens, addPhotoWords, openPhoto, openSpeak,
   setSpeakTab, renderSpeakWords, toggleRecord, showAddResult,
@@ -819,6 +881,7 @@ window.__h={
     if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
     await loadLocalLib();
     await loadMeta();
+    await loadGHToken();
     buildPools();
     const due=dueWords();
     let done=new Set(); try{done=await doneTodaySet();}catch(e){}
