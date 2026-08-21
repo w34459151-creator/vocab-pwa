@@ -656,7 +656,9 @@ function b64u(s){
 }
 async function autoSyncResult(result){
   if(!GH_TOKEN) return {ok:false, reason:'not-configured'};
-  const p='sync/'+todayStr()+'-'+Date.now()+'.json';
+  // 文件名加随机后缀防止毫秒级碰撞（同一秒内两次提交会 409）
+  const rnd = (typeof crypto!=='undefined' && crypto.randomUUID) ? crypto.randomUUID().slice(0,8) : Math.floor(Math.random()*1e9).toString(36);
+  const p='sync/'+todayStr()+'-'+Date.now()+'-'+rnd+'.json';
   try{
     const r=await fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+p,{
       method:'PUT',

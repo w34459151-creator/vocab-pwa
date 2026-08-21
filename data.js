@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "13";
+window.VOCAB_VERSION = "14";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -1651,6 +1651,32 @@ window.VOCAB_SCHED = {
     "interrupted",
     "already",
     "there",
-    "run"
+    "run",
+    "session",
+    "command",
+    "oops",
+    "upgrade"
+  ],
+  "2026-08-25": [
+    "output",
+    "Pro",
+    "something went wrong",
+    "payment",
+    "input",
+    "user center",
+    "developer",
+    "successful",
+    "there",
+    "budget",
+    "share",
+    "additional",
+    "back to",
+    "reset",
+    "collapse",
+    "problem",
+    "token",
+    "credit",
+    "seem",
+    "somewhere"
   ]
 };
