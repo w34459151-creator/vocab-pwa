@@ -62,18 +62,25 @@ function main() {
     }
   }
 
-  console.log('=== 3/6 重生成 data.js ===');
+  console.log('=== 3/6 自动升 sw.js 缓存版本（强制手机刷新，避免旧 data.js 被 SW 缓存） ===');
+  const swPath = path.join(ROOT, 'sw.js');
+  const swSrc = fs.readFileSync(swPath, 'utf8');
+  const vm = swSrc.match(/vocabpwa-v(\d+)/);
+  const nv = vm ? (parseInt(vm[1], 10) + 1) : 12;
+  fs.writeFileSync(swPath, swSrc.replace(/vocabpwa-v(\d+)/, 'vocabpwa-v' + nv), 'utf8');
+  console.log('sw.js 缓存版本 → vocabpwa-v' + nv);
+
+  console.log('=== 4/6 重生成 data.js ===');
   sh('"' + process.execPath + '" "' + path.join(ROOT, 'gen_pwa.js') + '"');
 
-  console.log('=== 4/6 提交 ===');
+  console.log('=== 5/6 提交 ===');
   try { console.log(String(sh('git add -A && git commit -m "' + commitMsg + '" 2>&1')).trim()); }
   catch (e) { console.log('[commit] ' + String(e.stdout || e.stderr || e.message).trim()); }
 
-  console.log('=== 5/6 推送 master ===');
+  console.log('=== 6/6 推送 master + gh-pages ===');
   try { console.log(String(sh('git push origin master 2>&1')).trim()); }
   catch (e) { console.error('[push master] ' + String(e.stdout || e.stderr || e.message).trim()); }
 
-  console.log('=== 6/6 推送 gh-pages（上线） ===');
   try { console.log(String(sh('git push origin master:gh-pages 2>&1')).trim()); }
   catch (e) { console.error('[push gh-pages] ' + String(e.stdout || e.stderr || e.message).trim()); }
 
