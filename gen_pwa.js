@@ -21,10 +21,14 @@ const LIB = (vocab.words || []).map(d => ({
 
 const SCHED = vocab.reviewSchedule || {};
 
+const swSrc = fs.readFileSync(path.join(__dirname, "sw.js"), 'utf8');
+const VER = (swSrc.match(/vocabpwa-v(\d+)/) || [])[1] || '?';
+
 const out =
   '// 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json\n' +
+  'window.VOCAB_VERSION = ' + JSON.stringify(VER) + ';\n' +
   'window.VOCAB_LIB = ' + JSON.stringify(LIB, null, 2) + ';\n' +
   'window.VOCAB_SCHED = ' + JSON.stringify(SCHED, null, 2) + ';\n';
 
 fs.writeFileSync(outPath, out, 'utf8');
-console.log('OK 生成 data.js：词', LIB.length, '｜ 日程日期', Object.keys(SCHED).length, '个');
+console.log('OK 生成 data.js：词', LIB.length, '｜ 日程日期', Object.keys(SCHED).length, '个｜ 版本 v' + VER);

@@ -103,6 +103,7 @@
   .copybtn{margin-top:8px;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:14px;cursor:pointer}
   .btnrow{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
   .empty{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;text-align:center;color:var(--sub);font-size:15px}
+  .appver{text-align:center;color:#c3c8d2;font-size:11.5px;margin-top:20px;user-select:none}
   .setrow{display:flex;justify-content:space-between;align-items:center;background:var(--card);
     border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px;font-size:14px}
   .setrow b{color:var(--accent);margin:0 10px;font-size:16px}
@@ -257,6 +258,8 @@
   </div>
 </div>
 
+<div class="appver" id="appVer"></div>
+
 <script src="data.js"></script>
 <script>
 /* ===== 数据（data.js 注入 window.VOCAB_LIB / window.VOCAB_SCHED） ===== */
@@ -360,6 +363,11 @@ async function refreshTop(){
   const done=(prog&&prog.done||[]).length;
   document.getElementById('goalTxt').textContent=`${done}/${dailyGoal}`;
   document.getElementById('goalFill').style.width=Math.min(100,Math.round(done/dailyGoal*100))+'%';
+  refreshVer();
+}
+function refreshVer(){
+  const el=document.getElementById('appVer');
+  if(el) el.textContent='词力 v'+(window.VOCAB_VERSION||'?')+' · 词库 '+LIB.length+' 词';
 }
 function showRemind(msg){const r=document.getElementById('remind');if(!r)return;r.textContent=msg;r.classList.add('show');setTimeout(()=>r.classList.remove('show'),6000);}
 
@@ -733,7 +741,7 @@ function addPhotoWords(){
     }
   });
   if(!added.length){ alert('没有新增词（都已存在）'); return; }
-  buildPools();
+  buildPools(); refreshVer();
   try{ dbSet('lib', LIB); }catch(e){}
   pendingAdd.push(...added.map(d=>({word:d.w, zh:d.zh})));
   showAddResult();
@@ -785,7 +793,7 @@ async function importLib(e){
     newWords.forEach(n=>{ if(n.w) map[n.w.toLowerCase()]=Object.assign({}, map[n.w.toLowerCase()]||{}, n); });
     LIB=Object.values(map);
     for(const k in newSched){ (SCHED[k]=SCHED[k]||[]).push(...newSched[k]); }
-    rebuildMap(); buildPools();
+    rebuildMap(); buildPools(); refreshVer();
     try{ await dbSet('lib',LIB); await dbSet('sched',SCHED); }catch(err){}
     if(trulyNew.length){ pendingAdd.push(...trulyNew.map(n=>({word:n.w,zh:n.zh}))); showAddResult(); }
     alert('已导入 '+newWords.length+' 词（新增 '+trulyNew.length+'，本地共 '+LIB.length+' 词）。\n可复制收词结果串发我同步桌面。');
