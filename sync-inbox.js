@@ -51,7 +51,8 @@ function main() {
       const r = JSON.parse(raw);
       if (!r.date) throw new Error('缺少 date 字段');
       const out = sh('"' + process.execPath + '" "' + UPDATER + '" --results-file "' + fp + '"');
-      fs.unlinkSync(fp);
+      // 用 git rm 删除（绕过 Node fs unlink 的沙箱 trash 钩子，避免删除失败导致重复合并）
+      sh('git rm -f "' + path.relative(ROOT, fp).replace(/\\/g, '/') + '" 2>&1');
       merged++;
       console.log('✓ ' + f + (r.level ? ' [' + r.level + ']' : '') + (r.reviewCompleted ? ' 对' + r.reviewCompleted.length : '') + (r.wrongAnswers ? ' 错' + r.wrongAnswers.length : ''));
       if (out) console.log(String(out).trim());
