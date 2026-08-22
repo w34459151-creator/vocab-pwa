@@ -43,13 +43,20 @@ function main() {
   }
 
   console.log('=== 2/6 合并 ' + files.length + ' 个结果文件 ===');
-  let merged = 0, failed = 0;
+  let merged = 0, failed = 0, snipper = 0;
   for (const f of files) {
     const fp = path.join(SYNC_DIR, f);
     try {
       const raw = fs.readFileSync(fp, 'utf8');
       const r = JSON.parse(raw);
       if (!r.date) throw new Error('缺少 date 字段');
+      // 识别扩展收藏（snipper）：不调 update-progress，保留文件等 AI 补全词条后 add-word.js 入库
+      if (r.type === 'snipper' || (r.items && Array.isArray(r.items))) {
+        snipper++;
+        const words = (r.items || []).map(x => x.word).filter(Boolean);
+        console.log('★ 发现扩展收藏 ' + f + '：' + words.length + ' 个新词（保留待 AI 补全：' + words.slice(0, 12).join(', ') + (words.length > 12 ? ' …' : '') + '）');
+        continue;
+      }
       const out = sh('"' + process.execPath + '" "' + UPDATER + '" --results-file "' + fp + '"');
       // 用 git rm 删除（绕过 Node fs unlink 的沙箱 trash 钩子，避免删除失败导致重复合并）
       sh('git rm -f "' + path.relative(ROOT, fp).replace(/\\/g, '/') + '" 2>&1');
@@ -60,6 +67,12 @@ function main() {
       failed++;
       console.error('✗ 处理失败 ' + f + '：' + (e.stderr || e.stdout || e.message));
     }
+  }
+
+  // 若只有扩展收藏（无复习结果合并），不升缓存版本、不重生成、不部署（等 AI 补全入库后统一做）
+  if (merged === 0 && snipper > 0) {
+    console.log('本次仅发现 ' + snipper + ' 个扩展收藏文件，无复习结果合并。等待 AI 补全词条后 add-word.js 入库并部署。');
+    return;
   }
 
   console.log('=== 3/6 自动升 sw.js 缓存版本（强制手机刷新，避免旧 data.js 被 SW 缓存） ===');

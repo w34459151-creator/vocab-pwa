@@ -17,6 +17,8 @@ const LIB = (vocab.words || []).map(d => ({
   p: d.phonetic || '',
   zh: (d.trans || []).join('；'),
   sc: d.scenario || '',
+  dct: d.dict || 'ai',
+  src: d.source || '',
   ph: (d.phrases || []).map(s => {
     const i = s.indexOf(' = ');
     return i >= 0 ? [s.slice(0, i), s.slice(i + 3)] : [s, ''];

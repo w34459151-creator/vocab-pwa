@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "14";
+window.VOCAB_VERSION = "15";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -7,6 +7,8 @@ window.VOCAB_LIB = [
     "p": "/swɪtʃ/",
     "zh": "(v.) 切换；转换；(n.) 开关；转换器",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "switch to",
@@ -37,6 +39,8 @@ window.VOCAB_LIB = [
     "p": "/ˈkʌrəntli/",
     "zh": "(adv.) 目前；当前；现在",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "currently available",
@@ -63,6 +67,8 @@ window.VOCAB_LIB = [
     "p": "/ɪkˈstɜːrnl/",
     "zh": "(adj.) 外部的；外来的；对外的",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "external context",
@@ -93,6 +99,8 @@ window.VOCAB_LIB = [
     "p": "/ˈkɒntekst/",
     "zh": "(n.) 上下文；语境；背景",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "in context",
@@ -123,6 +131,8 @@ window.VOCAB_LIB = [
     "p": "/ˈɒnɡəʊɪŋ/",
     "zh": "(adj.) 进行中的；持续存在的",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "ongoing conversation",
@@ -153,6 +163,8 @@ window.VOCAB_LIB = [
     "p": "/ˌkɒnvəˈseɪʃn/",
     "zh": "(n.) 对话；交谈；会话",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "new conversation",
@@ -183,6 +195,8 @@ window.VOCAB_LIB = [
     "p": "/pʊʃ/",
     "zh": "(v.) 推送；推动；按（按钮）；(n.) 推；推送",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "push to",
@@ -213,6 +227,8 @@ window.VOCAB_LIB = [
     "p": "/pʊl/",
     "zh": "(v.) 拉取；拉；拖；(n.) 拉；牵引",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "pull from",
@@ -243,6 +259,8 @@ window.VOCAB_LIB = [
     "p": "/swiːt/",
     "zh": "(n.) 套件；一套（软件/程序）；(n.) （酒店）套房",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "tool suite",
@@ -273,6 +291,8 @@ window.VOCAB_LIB = [
     "p": "/ˈverɪfaɪ/",
     "zh": "(v.) 验证；核实；证实",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "verify identity",
@@ -299,6 +319,8 @@ window.VOCAB_LIB = [
     "p": "/rɪˈməʊt/",
     "zh": "(adj.) 远程的；偏远的；(n.) 远程（设备）",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "remote repository",
@@ -329,6 +351,8 @@ window.VOCAB_LIB = [
     "p": "/ˌʌpˈdeɪt/",
     "zh": "(v.) 更新；升级；(n.) 更新；最新消息",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "update code",
@@ -359,6 +383,8 @@ window.VOCAB_LIB = [
     "p": "/rʌn/",
     "zh": "(v.) 运行；跑；经营；(n.) 运行；一段（路程/时期）",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "run a script",
@@ -389,6 +415,8 @@ window.VOCAB_LIB = [
     "p": "/ˈfiːtʃə(r)/",
     "zh": "(n.) 功能；特性；特征；(v.) 以……为特色",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "new feature",
@@ -419,6 +447,8 @@ window.VOCAB_LIB = [
     "p": "/ˈtɒpɪk/",
     "zh": "(n.) 话题；主题；题目",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "hot topic",
@@ -449,6 +479,8 @@ window.VOCAB_LIB = [
     "p": "/freʃ/",
     "zh": "(adj.) 新鲜的；崭新的；清新的",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "fresh start",
@@ -479,6 +511,8 @@ window.VOCAB_LIB = [
     "p": "/tʃæt/",
     "zh": "(n.) 聊天；闲谈；(v.) 聊天；闲谈",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "chat with",
@@ -509,6 +543,8 @@ window.VOCAB_LIB = [
     "p": "/kiːp/",
     "zh": "(v.) 保持；保留；维持；(n.) 生计；城堡主塔",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "keep doing",
@@ -539,6 +575,8 @@ window.VOCAB_LIB = [
     "p": "/ˈjuːsɪdʒ/",
     "zh": "(n.) 使用；用法；使用量",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "data usage",
@@ -569,6 +607,8 @@ window.VOCAB_LIB = [
     "p": "/ˈləʊə(r)/",
     "zh": "(adj.) 更低的；下游的；(v.) 降低；放下",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "lower cost",
@@ -599,6 +639,8 @@ window.VOCAB_LIB = [
     "p": "/ɡɪt/",
     "zh": "(n.) Git 分布式版本控制系统（软件名，工作场景专指）；(n.) [俚] 笨蛋（英式口语，较少用）",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "git pull",
@@ -633,6 +675,8 @@ window.VOCAB_LIB = [
     "p": "/fetʃ/",
     "zh": "(v.) 取来；获取；拉取（git 语境：从远端服务器获取最新提交，不自动合并）",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "git fetch",
@@ -659,6 +703,8 @@ window.VOCAB_LIB = [
     "p": "/rɪˈpɒzətri/",
     "zh": "(n.) 仓库；存储库（代码仓库，存放项目的全部版本历史）；(n.) 贮藏室；存放处",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "git repository",
@@ -689,6 +735,8 @@ window.VOCAB_LIB = [
     "p": "/ˈkoʊpɪlət/",
     "zh": "(n.) 副驾驶；AI 助手（微软 Copilot 等产品名）",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "GitHub Copilot（AI 编程助手）",
@@ -711,6 +759,8 @@ window.VOCAB_LIB = [
     "p": "/ˌɪntəˈrʌptɪd/",
     "zh": "(adj.) 被打断的；中断的",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "interrupted connection（连接中断）",
@@ -729,6 +779,8 @@ window.VOCAB_LIB = [
     "p": "/ˈfɪnɪʃ/",
     "zh": "(v.) 完成；结束；(n.) 结尾；完成",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "finish the task（完成任务）",
@@ -747,6 +799,8 @@ window.VOCAB_LIB = [
     "p": "/ˈɔːtoʊ/",
     "zh": "(adj./prefix) 自动的；自动（automatic/automobile 的缩写）",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "auto-save（自动保存）",
@@ -777,6 +831,8 @@ window.VOCAB_LIB = [
     "p": "/ɔːlˈredi/",
     "zh": "(adv.) 已经；早已",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "already up to date（已经最新）",
@@ -799,6 +855,8 @@ window.VOCAB_LIB = [
     "p": "/ʌpˈdeɪtɪŋ/",
     "zh": "(v.) 正在更新（update 的现在分词）；(n.) 更新中",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "updating dependencies（正在更新依赖）",
@@ -817,6 +875,8 @@ window.VOCAB_LIB = [
     "p": "/ˌfɑːst ˈfɔːwəd/",
     "zh": "(v./n.) 快进；快进合并（git 一种无分叉的合并方式）",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "fast-forward merge（快进合并）",
@@ -843,6 +903,8 @@ window.VOCAB_LIB = [
     "p": "/ˈɒrɪdʒɪn/",
     "zh": "(n.) 起源；起点；(n.) git 中远程仓库的默认别名（通常指克隆来源的远端）",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "origin/main（远程 main 分支）",
@@ -865,6 +927,8 @@ window.VOCAB_LIB = [
     "p": "/meɪn/",
     "zh": "(adj.) 主要的；最重要的；(n.) git 默认主分支名（2020 年起取代 master）",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "main branch（主分支）",
@@ -891,6 +955,8 @@ window.VOCAB_LIB = [
     "p": "/ˈkredɪt/",
     "zh": "(n.) 积分；额度（AI 工具计费单位，如 AI credits）",
     "sc": "账户/支付",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "AI credits（AI 积分）",
@@ -913,6 +979,8 @@ window.VOCAB_LIB = [
     "p": "/ˈtoʊkən/",
     "zh": "(n.) 词元；令牌（AI 模型计费与处理的最小单位，输入/输出都按 token 计）",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "input tokens（输入词元）",
@@ -935,6 +1003,8 @@ window.VOCAB_LIB = [
     "p": "/ˈseʃ(ə)n/",
     "zh": "(n.) 会话；一段时间（AI 工具里指一次连续对话）",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "chat session（聊天会话）",
@@ -957,6 +1027,8 @@ window.VOCAB_LIB = [
     "p": "/riːˈset/",
     "zh": "(v./n.) 重置；清零",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "reset password（重置密码）",
@@ -979,6 +1051,8 @@ window.VOCAB_LIB = [
     "p": "/ˈʌpɡreɪd/",
     "zh": "(v./n.) 升级；提升",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "upgrade plan（升级套餐）",
@@ -1001,6 +1075,8 @@ window.VOCAB_LIB = [
     "p": "/əˈdɪʃənl/",
     "zh": "(adj.) 额外的；附加的",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "additional cost（额外成本）",
@@ -1023,6 +1099,8 @@ window.VOCAB_LIB = [
     "p": "/ˈbʌdʒɪt/",
     "zh": "(n.) 预算；额度",
     "sc": "账户/支付",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "monthly budget（月度预算）",
@@ -1045,6 +1123,8 @@ window.VOCAB_LIB = [
     "p": "/ˈɪnpʊt/",
     "zh": "(n./v.) 输入；投入",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "input box（输入框）",
@@ -1067,6 +1147,8 @@ window.VOCAB_LIB = [
     "p": "/ˈaʊtpʊt/",
     "zh": "(n./v.) 输出；产出",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "output result（输出结果）",
@@ -1085,6 +1167,8 @@ window.VOCAB_LIB = [
     "p": "/ʃer/",
     "zh": "(v./n.) 分享；共享",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "share chat（分享对话）",
@@ -1107,6 +1191,8 @@ window.VOCAB_LIB = [
     "p": "/kəˈlæps/",
     "zh": "(v.) 折叠；收起；崩溃",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "collapse panel（折叠面板）",
@@ -1129,6 +1215,8 @@ window.VOCAB_LIB = [
     "p": "/proʊ/",
     "zh": "(n./adj.) 专业版；专业的（产品付费档位名，如 Copilot Pro）",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "Copilot Pro（Copilot 专业版）",
@@ -1151,6 +1239,8 @@ window.VOCAB_LIB = [
     "p": "/dɪˈveləpər/",
     "zh": "(n.) 开发者；开发人员",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "developer tools（开发者工具）",
@@ -1173,6 +1263,8 @@ window.VOCAB_LIB = [
     "p": "/kəˈmænd/",
     "zh": "(n./v.) 命令；指令",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "command line（命令行）",
@@ -1195,6 +1287,8 @@ window.VOCAB_LIB = [
     "p": "/səkˈsesfl/",
     "zh": "(adj.) 成功的；顺利的",
     "sc": "账户/支付",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "successful payment",
@@ -1213,6 +1307,8 @@ window.VOCAB_LIB = [
     "p": "/ˈpeɪmənt/",
     "zh": "(n.) 支付；付款；支付的款项",
     "sc": "账户/支付",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "make a payment",
@@ -1235,6 +1331,8 @@ window.VOCAB_LIB = [
     "p": "/ʊps/",
     "zh": "(int.) 哎呀；糟糕；啊哦",
     "sc": "账户/支付",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "oops, sorry",
@@ -1253,6 +1351,8 @@ window.VOCAB_LIB = [
     "p": "/ˈsʌmθɪŋ wɛnt rɒŋ/",
     "zh": "(phrase.) 出错了；发生了错误",
     "sc": "账户/支付",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "something went wrong",
@@ -1271,6 +1371,8 @@ window.VOCAB_LIB = [
     "p": "/ðeə(r)/",
     "zh": "(adv.) 在那里；到那里；在那里存在",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "over there",
@@ -1293,6 +1395,8 @@ window.VOCAB_LIB = [
     "p": "/siːm/",
     "zh": "(v.) 似乎；好像；看来",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "it seems that",
@@ -1315,6 +1419,8 @@ window.VOCAB_LIB = [
     "p": "/ˈprɒbləm/",
     "zh": "(n.) 问题；麻烦；难题",
     "sc": "账户/支付",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "some problem",
@@ -1337,6 +1443,8 @@ window.VOCAB_LIB = [
     "p": "/ˈsʌmweə(r)/",
     "zh": "(adv.) 在某处；到某处；大约",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "somewhere else",
@@ -1359,6 +1467,8 @@ window.VOCAB_LIB = [
     "p": "/ˈjuːzə(r) ˈsentə(r)/",
     "zh": "(n.) 用户中心；账户中心",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "back to user center",
@@ -1377,6 +1487,8 @@ window.VOCAB_LIB = [
     "p": "/bæk tuː/",
     "zh": "(phrase.) 返回；回到",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "back to home",
@@ -1399,6 +1511,8 @@ window.VOCAB_LIB = [
     "p": "",
     "zh": "(n.) 代理；代理服务器",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [],
     "se": [
       [
@@ -1412,6 +1526,8 @@ window.VOCAB_LIB = [
     "p": "",
     "zh": "(v.) 读取参数（程序函数名，read + params）",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [],
     "se": [
       [
@@ -1425,6 +1541,8 @@ window.VOCAB_LIB = [
     "p": "/ˈpædəl əʊ si ɑːr/",
     "zh": "(n.) 百度飞桨（PaddlePaddle）开源的光学字符识别（OCR）工具库，用于从图片/截图中提取文字；(n.) 一款开源的 OCR 文字识别引擎",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "PaddleOCR",
@@ -1443,6 +1561,8 @@ window.VOCAB_LIB = [
     "p": "/ˈwɪspər/",
     "zh": "(n.) OpenAI 开源的自动语音识别（ASR）模型，可将语音转成文字；(n.) 一种语音转文字的 AI 模型",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [
       [
         "Whisper",
@@ -1461,6 +1581,8 @@ window.VOCAB_LIB = [
     "p": "/ˌdiːpˈsiːk ˈeɪpiːaɪ/",
     "zh": "(n.) DeepSeek 大模型提供的应用程序接口，用于把 AI 能力接入自己的程序/工作流；(n.) DeepSeek 模型的 API 调用接口",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [],
     "se": [
       [
@@ -1474,6 +1596,8 @@ window.VOCAB_LIB = [
     "p": "/biː biː daʊn/",
     "zh": "(n.) 一款开源命令行工具，用于下载 Bilibili（B站）视频；(n.) B站视频下载器",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [],
     "se": [
       [
@@ -1487,6 +1611,8 @@ window.VOCAB_LIB = [
     "p": "/ef em peg/",
     "zh": "(n.) 开源音视频处理命令行工具/库，用于转码、剪辑、合并、流媒体处理；(n.) 跨平台音视频编解码工具",
     "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
     "ph": [],
     "se": [
       [
@@ -1500,6 +1626,8 @@ window.VOCAB_LIB = [
     "p": "/rɪˈkwests/",
     "zh": "(n./v.) Python 中常用的 HTTP 请求库；请求；(n.) 一个让 Python 发 HTTP 请求变得简单的第三方库",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [],
     "se": [
       [
@@ -1513,6 +1641,8 @@ window.VOCAB_LIB = [
     "p": "/ˈpaɪθən ˈdɒks/",
     "zh": "(n.) Python 中用于读写 Microsoft Word .docx 文件的第三方库；(n.) Python 操作 Word 文档的库",
     "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
     "ph": [],
     "se": [
       [

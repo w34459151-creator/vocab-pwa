@@ -167,8 +167,11 @@
   <button class="spd" data-rate="1.1" onclick="setRate(1.1,this)">快</button>
 </div>
 
-<!-- 首页：范围 + 关卡 -->
+<!-- 首页：词库 + 范围 + 关卡 -->
 <div class="panel show" id="home">
+  <div class="ranges" id="dicts" style="margin-bottom:8px">
+    <button class="rng active" data-d="all" onclick="setDict('all',this)">全部词库</button>
+  </div>
   <div class="ranges" id="ranges">
     <button class="rng active" data-r="due" onclick="setRange('due',this)">今日到期</button>
     <button class="rng" data-r="weak" onclick="setRange('weak',this)">薄弱词</button>
@@ -332,14 +335,14 @@ async function loadLocalLib(){
 function todayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function dayDiff(a,b){const da=new Date(a),db=new Date(b);return Math.round((db-da)/86400000);}
 function dueWords(){const t=todayStr();const set={};Object.keys(SCHED).forEach(dt=>{if(dt<=t)(SCHED[dt]||[]).forEach(w=>set[w]=1);});
-  return Object.keys(set).filter(w=>LIBMAP[w]);}
+  return Object.keys(set).filter(w=>LIBMAP[w] && inDict(LIBMAP[w]));}
 async function doneTodaySet(){const p=await dbGet('progress_'+todayStr());return new Set((p&&p.done)||[]);}
 async function weakSet(){try{const w=await dbGet('weak');return new Set(w||[]);}catch(e){return new Set();}}
 async function addWeak(w){try{const s=await weakSet();s.add(w);await dbSet('weak',[...s]);}catch(e){}}
 
 /* ===== 全局状态 ===== */
 let DATA=[];                       // 学习复习展示的到期词
-let RATE=0.7, RANGE='due', qLevel='L1';
+let RATE=0.7, RANGE='due', qLevel='L1', DICT='all';
 let QUIZ=[], qcur=0;
 let streak=0, lastDone=null, dailyGoal=5, soundOn=true, strictMode=false;
 let pendingAdd=[];                 // 手机端拍照/导入新增的词（待结果串回桌面）
@@ -431,7 +434,27 @@ async function onSessionDone(){
 /* ===== 范围 / 学习复习 ===== */
 function setRange(r,btn){
   RANGE=r;
-  document.querySelectorAll('.rng').forEach(b=>b.classList.toggle('active',b.dataset.r===r));
+  document.querySelectorAll('#ranges .rng').forEach(b=>b.classList.toggle('active',b.dataset.r===r));
+}
+function setDict(d,btn){
+  DICT=d;
+  document.querySelectorAll('#dicts .rng').forEach(b=>b.classList.toggle('active',b.dataset.d===d));
+  refreshTop();
+  refreshData();
+}
+async function refreshData(){
+  const due=dueWords();
+  let done=new Set(); try{done=await doneTodaySet();}catch(e){}
+  DATA=due.filter(w=>!done.has(w)).map(w=>LIBMAP[w]).filter(Boolean);
+  if(document.getElementById('pStudy').classList.contains('show')) renderLearn();
+}
+function inDict(d){ return DICT==='all' || (d.dct||'ai')===DICT; }
+function renderDictChips(){
+  const box=document.getElementById('dicts');
+  if(!box) return;
+  const set=new Set((LIB||[]).map(x=>x.dct||'ai'));
+  const chips=['all',...set].map(d=>`<button class="rng ${d===DICT?'active':''}" data-d="${d}" onclick="setDict('${d}',this)">${d==='all'?'全部词库':d}</button>`).join('');
+  box.innerHTML=chips;
 }
 function renderLearn(){
   const box=document.getElementById('learnList'); box.innerHTML='';
@@ -449,8 +472,8 @@ function renderLearn(){
 
 /* ===== 范围取词 ===== */
 async function rangeWords(){
-  if(RANGE==='all') return LIB.slice();
-  if(RANGE==='weak'){ const wk=await weakSet(); return LIB.filter(d=>wk.has(d.w)); }
+  if(RANGE==='all') return LIB.filter(inDict);
+  if(RANGE==='weak'){ const wk=await weakSet(); return LIB.filter(d=>wk.has(d.w) && inDict(d)); }
   const due=dueWords();
   let done=new Set(); try{done=await doneTodaySet();}catch(e){}
   return due.filter(w=>!done.has(w)).map(w=>LIBMAP[w]).filter(Boolean);
@@ -914,7 +937,7 @@ function addPhotoWords(){
       const zh=zhI?zhI.value.trim():'';
       const lw=t.toLowerCase();
       if(LIBMAP[lw]){ if(zh && !LIBMAP[lw].zh) LIBMAP[lw].zh=zh; }
-      else { const d={w:t,p:'',zh:zh,sc:'工作/AI工具',ph:[],se:[]}; LIB.push(d); LIBMAP[lw]=d; added.push(d); }
+      else { const d={w:t,p:'',zh:zh,sc:'工作/AI工具',dct:DICT==='all'?'ai':DICT,ph:[],se:[]}; LIB.push(d); LIBMAP[lw]=d; added.push(d); }
     }
   });
   if(!added.length){ alert('没有新增词（都已存在）'); return; }
@@ -981,7 +1004,7 @@ async function importLib(e){
 /* ===== 自测钩子 ===== */
 window.__h={
   get LIB(){return LIB}, get LIBMAP(){return LIBMAP}, get QUIZ(){return QUIZ}, get qcur(){return qcur},
-  get DATA(){return DATA}, get streak(){return streak}, get dailyGoal(){return dailyGoal},
+  get DATA(){return DATA}, get streak(){return streak}, get dailyGoal(){return dailyGoal}, get DICT(){return DICT},
   get pendingAdd(){return pendingAdd}, get photoTokens(){return photoTokens},
   setGHToken(t){GH_TOKEN=t||'';}, getGHToken(){return GH_TOKEN;}, autoSyncResult, b64u,
   goLevel, setRange, renderQuiz, backHome, openSettings, qChoose, qNext, qSubmit, qPrev, setRate, importLib,
@@ -999,6 +1022,7 @@ window.__h={
     await loadMeta();
     await loadGHToken();
     buildPools();
+    renderDictChips();
     const due=dueWords();
     let done=new Set(); try{done=await doneTodaySet();}catch(e){}
     DATA=due.filter(w=>!done.has(w)).map(w=>LIBMAP[w]).filter(Boolean);
