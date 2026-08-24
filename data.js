@@ -1650,6 +1650,66 @@ window.VOCAB_LIB = [
         "用 python-docx 自动生成 Word 报告。"
       ]
     ]
+  },
+  {
+    "w": "python",
+    "p": "/ˈpaɪθən/",
+    "zh": "(n.) 蟒蛇；（计算机）Python 编程语言",
+    "sc": "开发/Git",
+    "dct": "ai",
+    "src": "",
+    "ph": [
+      [
+        "Python package",
+        "Python 包/第三方库"
+      ]
+    ],
+    "se": [
+      [
+        "We automated the daily report with a Python script.",
+        "我们用一段 Python 脚本把每日报表自动化了。"
+      ]
+    ]
+  },
+  {
+    "w": "dashboard",
+    "p": "/ˈdæʃbɔːrd/",
+    "zh": "(n.) 仪表盘；控制面板；（数据）看板",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
+    "ph": [
+      [
+        "dashboard panel",
+        "仪表盘面板"
+      ]
+    ],
+    "se": [
+      [
+        "The monitoring dashboard displays real-time metrics.",
+        "监控仪表盘展示实时指标。"
+      ]
+    ]
+  },
+  {
+    "w": "media-fetcher",
+    "p": "",
+    "zh": "",
+    "sc": "",
+    "dct": "ai",
+    "src": "",
+    "ph": [],
+    "se": []
+  },
+  {
+    "w": "santai-handover",
+    "p": "",
+    "zh": "",
+    "sc": "",
+    "dct": "ai",
+    "src": "",
+    "ph": [],
+    "se": []
   }
 ];
 window.VOCAB_SCHED = {
@@ -1785,7 +1845,9 @@ window.VOCAB_SCHED = {
     "session",
     "command",
     "oops",
-    "upgrade"
+    "upgrade",
+    "python",
+    "dashboard"
   ],
   "2026-08-25": [
     "output",
@@ -1808,5 +1870,9 @@ window.VOCAB_SCHED = {
     "credit",
     "seem",
     "somewhere"
+  ],
+  "2026-08-24": [
+    "media-fetcher",
+    "santai-handover"
   ]
 };
