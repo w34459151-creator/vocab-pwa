@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "19";
+window.VOCAB_VERSION = "20";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -5251,6 +5251,294 @@ window.VOCAB_LIB = [
         "tool_trade_date_hist_sina 下载历史交易日。"
       ]
     ]
+  },
+  {
+    "w": "overnight",
+    "p": "/ˌoʊvərˈnaɪt/",
+    "zh": "(adv./adj.) 在夜间；通宵；隔夜；(adj.) 突然的；一夜之间的",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "AI 工作流提示语",
+    "ph": [
+      [
+        "overnight run",
+        "通宵运行/隔夜跑批"
+      ],
+      [
+        "overnight build",
+        "隔夜构建"
+      ]
+    ],
+    "se": [
+      [
+        "Leave the computer on for the overnight ASR batch run.",
+        "让电脑开着，跑通宵的 ASR 批处理。"
+      ],
+      [
+        "Overnight verification confirmed 11 videos processed.",
+        "隔夜验证确认处理了 11 个视频。"
+      ]
+    ]
+  },
+  {
+    "w": "unverified",
+    "p": "/ʌnˈverɪfaɪd/",
+    "zh": "(adj.) 未验证的；未经核实的",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "AI 工作流提示语",
+    "ph": [
+      [
+        "unverified claim",
+        "未经证实的说法"
+      ]
+    ],
+    "se": [
+      [
+        "Do not auto-fix unverified functions without confirmation.",
+        "没有确认不要自动修复未验证的函数。"
+      ],
+      [
+        "The unverified data was excluded from the report.",
+        "未验证的数据被排除在报告之外。"
+      ]
+    ]
+  },
+  {
+    "w": "confirmation",
+    "p": "/ˌkɑːnfərˈmeɪʃn/",
+    "zh": "(n.) 确认；证实；确认函",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "AI 工作流提示语",
+    "ph": [
+      [
+        "confirmation dialog",
+        "确认弹窗"
+      ],
+      [
+        "await confirmation",
+        "等待确认"
+      ]
+    ],
+    "se": [
+      [
+        "The fix requires user confirmation before running.",
+        "修复运行前需要用户确认。"
+      ],
+      [
+        "We are waiting for confirmation of the deploy.",
+        "我们在等部署的确认。"
+      ],
+      [
+        "Click to send confirmation.",
+        "点击发送确认。"
+      ]
+    ]
+  },
+  {
+    "w": "resume",
+    "p": "/rɪˈzuːm/",
+    "zh": "(v.) 恢复；继续；重新开始；(n.) 简历（另义）",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "AI 工作流提示语",
+    "ph": [
+      [
+        "resume work",
+        "复工/继续工作"
+      ],
+      [
+        "resume session",
+        "恢复会话"
+      ]
+    ],
+    "se": [
+      [
+        "I will resume the task tomorrow when you turn it back on.",
+        "明天你重新开机后我会继续这个任务。"
+      ],
+      [
+        "Resume the pipeline after the crash.",
+        "崩溃后恢复流水线。"
+      ]
+    ]
+  },
+  {
+    "w": "pending",
+    "p": "/ˈpendɪŋ/",
+    "zh": "(adj.) 待定的；待处理的；悬而未决的；(prep.) 在…期间；直到",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "AI 工作流提示语",
+    "ph": [
+      [
+        "pending tasks",
+        "待办任务"
+      ],
+      [
+        "leave pending",
+        "搁置"
+      ]
+    ],
+    "se": [
+      [
+        "All 5 todos are marked pending then completed.",
+        "5 个待办先标记待定，再标记完成。"
+      ],
+      [
+        "The pending changes need your review.",
+        "待处理的改动需要你review。"
+      ],
+      [
+        "The case is pending approval.",
+        "该案待审批。"
+      ],
+      [
+        "Pending your confirmation, we will not deploy.",
+        "在你确认之前，我们不会部署。"
+      ]
+    ]
+  },
+  {
+    "w": "verification",
+    "p": "/ˌverɪfɪˈkeɪʃn/",
+    "zh": "(n.) 验证；核实；确认",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "AI 工作流提示语",
+    "ph": [
+      [
+        "verification code",
+        "验证码"
+      ],
+      [
+        "verification failed",
+        "验证失败"
+      ]
+    ],
+    "se": [
+      [
+        "Overnight verification of the B站 ASR pipeline finished.",
+        "B站 ASR 流水线的隔夜验证完成。"
+      ],
+      [
+        "The verification step caught 6 wasted videos.",
+        "验证步骤发现了 6 个浪费的视频。"
+      ]
+    ]
+  },
+  {
+    "w": "standpoint",
+    "p": "/ˈstændpɔɪnt/",
+    "zh": "(n.) 立场；观点；角度",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "AI 工作流提示语",
+    "ph": [
+      [
+        "from X standpoint",
+        "从 X 的角度/立场"
+      ],
+      [
+        "risk standpoint",
+        "风险角度"
+      ]
+    ],
+    "se": [
+      [
+        "From a risk standpoint, leaving the PC on is safer.",
+        "从风险角度看，让电脑开着更安全。"
+      ],
+      [
+        "Consider it from the user's standpoint.",
+        "从用户的角度考虑这件事。"
+      ]
+    ]
+  },
+  {
+    "w": "continuously",
+    "p": "/kənˈtɪnjuəsli/",
+    "zh": "(adv.) 连续地；持续地；不间断地",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "AI 工作流提示语",
+    "ph": [
+      [
+        "run continuously",
+        "持续运行"
+      ],
+      [
+        "monitor continuously",
+        "持续监控"
+      ]
+    ],
+    "se": [
+      [
+        "Whether to run things continuously or wait until morning.",
+        "是持续运行还是等到早上再处理。"
+      ],
+      [
+        "The monitor runs continuously throughout the day.",
+        "监控器全天持续运行。"
+      ]
+    ]
+  },
+  {
+    "w": "schtasks",
+    "p": "/ˈskætæks/",
+    "zh": "(n.) Windows 计划任务命令行工具（schtasks.exe）",
+    "sc": "media-fetcher/开发",
+    "dct": "dev",
+    "src": "AI 工作流提示语",
+    "ph": [
+      [
+        "schtasks /create",
+        "创建计划任务"
+      ],
+      [
+        "schtasks /query",
+        "查询计划任务"
+      ]
+    ],
+    "se": [
+      [
+        "The manual schtasks steps need to be run by the user.",
+        "用户需要手动运行 schtasks 步骤。"
+      ],
+      [
+        "schtasks creates a scheduled task on Windows.",
+        "schtasks 在 Windows 上创建计划任务。"
+      ]
+    ]
+  },
+  {
+    "w": "pipeline",
+    "p": "/ˈpaɪplaɪn/",
+    "zh": "(n.) 流水线；管道；工作流链（数据处理/CI 语境）",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "AI 工作流提示语",
+    "ph": [
+      [
+        "data pipeline",
+        "数据流水线"
+      ],
+      [
+        "CI pipeline",
+        "持续集成流水线"
+      ]
+    ],
+    "se": [
+      [
+        "The B站 ASR pipeline processes videos end to end.",
+        "B站 ASR 流水线端到端处理视频。"
+      ],
+      [
+        "A broken pipeline wasted 6 videos silently.",
+        "一条失效的流水线静默浪费了 6 个视频。"
+      ]
+    ]
   }
 ];
 window.VOCAB_SCHED = {
@@ -5578,6 +5866,16 @@ window.VOCAB_SCHED = {
     "tool_trade_date_hist_sina",
     "chinese_calendar",
     "trade_date",
-    "hist"
+    "hist",
+    "overnight",
+    "unverified",
+    "confirmation",
+    "resume",
+    "pending",
+    "verification",
+    "standpoint",
+    "continuously",
+    "schtasks",
+    "pipeline"
   ]
 };
