@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "16";
+window.VOCAB_VERSION = "17";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -4847,6 +4847,134 @@ window.VOCAB_LIB = [
         "你在下一次调用中把对话与推理内容回传给 API。"
       ]
     ]
+  },
+  {
+    "w": "append_subtitle",
+    "p": "/əˈpend ˈsʌbtaɪtl/",
+    "zh": "(n.) 追加字幕脚本；合并字幕脚本（media-fetcher 组件）",
+    "sc": "media-fetcher/开发",
+    "dct": "dev",
+    "src": "media-fetcher 项目文件",
+    "ph": [
+      [
+        "append subtitle",
+        "追加字幕"
+      ]
+    ],
+    "se": [
+      [
+        "Run append_subtitle.py to merge generated subtitles into the video.",
+        "运行 append_subtitle.py 把生成的字幕合并进视频。"
+      ],
+      [
+        "The append_subtitle step comes after ASR transcription.",
+        "append_subtitle 步骤在语音转写之后执行。"
+      ]
+    ]
+  },
+  {
+    "w": "update_manifest",
+    "p": "/ʌpˈdeɪt ˈmænɪfest/",
+    "zh": "(n.) 更新清单脚本；刷新元数据清单脚本",
+    "sc": "media-fetcher/开发",
+    "dct": "dev",
+    "src": "media-fetcher 项目文件",
+    "ph": [
+      [
+        "update manifest",
+        "更新清单"
+      ]
+    ],
+    "se": [
+      [
+        "update_manifest.py refreshes the task list before each run.",
+        "update_manifest.py 在每次运行前刷新任务清单。"
+      ]
+    ]
+  },
+  {
+    "w": "solutions",
+    "p": "/səˈluːʃənz/",
+    "zh": "(n.) 解决方案；经验总结文档（复数）",
+    "sc": "media-fetcher/开发",
+    "dct": "dev",
+    "src": "media-fetcher 项目文件",
+    "ph": [
+      [
+        "solutions.md",
+        "经验文档"
+      ]
+    ],
+    "se": [
+      [
+        "We document Bilibili scraping lessons in solutions.md.",
+        "我们把 B站 爬取经验记在 solutions.md 里。"
+      ]
+    ]
+  },
+  {
+    "w": "subtitle",
+    "p": "/ˈsʌbtaɪtl/",
+    "zh": "(n.) 字幕；副标题",
+    "sc": "media-fetcher/开发",
+    "dct": "dev",
+    "src": "",
+    "ph": [
+      [
+        "subtitle file",
+        "字幕文件"
+      ]
+    ],
+    "se": [
+      [
+        "Download the video and extract its subtitles.",
+        "下载视频并提取字幕。"
+      ]
+    ]
+  },
+  {
+    "w": "manifest",
+    "p": "/ˈmænɪfest/",
+    "zh": "(n.) 清单；货单；显式声明文件；(v.) 显示；表明",
+    "sc": "media-fetcher/开发",
+    "dct": "dev",
+    "src": "",
+    "ph": [
+      [
+        "manifest file",
+        "清单文件"
+      ]
+    ],
+    "se": [
+      [
+        "The manifest lists all pending download tasks.",
+        "manifest 列出所有待下载任务。"
+      ]
+    ]
+  },
+  {
+    "w": "append",
+    "p": "/əˈpend/",
+    "zh": "(v.) 追加；附加；增补",
+    "sc": "media-fetcher/开发",
+    "dct": "dev",
+    "src": "",
+    "ph": [
+      [
+        "append to",
+        "追加到"
+      ],
+      [
+        "append mode",
+        "追加模式"
+      ]
+    ],
+    "se": [
+      [
+        "Append the new line to the end of the file.",
+        "把新行追加到文件末尾。"
+      ]
+    ]
   }
 ];
 window.VOCAB_SCHED = {
@@ -5157,5 +5285,13 @@ window.VOCAB_SCHED = {
     "reasoning_content",
     "passed back",
     "API"
+  ],
+  "2026-08-30": [
+    "append_subtitle",
+    "update_manifest",
+    "solutions",
+    "subtitle",
+    "manifest",
+    "append"
   ]
 };
