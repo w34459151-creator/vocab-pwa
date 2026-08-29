@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "18";
+window.VOCAB_VERSION = "19";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -5083,6 +5083,174 @@ window.VOCAB_LIB = [
         "我们把两个模型并排对比。"
       ]
     ]
+  },
+  {
+    "w": "cn_stock_holidays",
+    "p": "/ˌsiːɛn stɑːk ˈhɑːlɪdeɪz/",
+    "zh": "(n.) 中国股市休假日数据（akshare 接口/字段名）",
+    "sc": "金融/量化",
+    "dct": "ai",
+    "src": "akshare/量化工具",
+    "ph": [
+      [
+        "stock holidays",
+        "股市休假日"
+      ],
+      [
+        "cn_stock",
+        "中国股票"
+      ]
+    ],
+    "se": [
+      [
+        "Use cn_stock_holidays to skip non-trading days in backtests.",
+        "用 cn_stock_holidays 在回测中跳过非交易日。"
+      ],
+      [
+        "The cn_stock_holidays table lists all A-share market closures.",
+        "cn_stock_holidays 表列出所有 A 股市场休市日。"
+      ]
+    ]
+  },
+  {
+    "w": "akshare",
+    "p": "/ˌeɪkeɪˈʃeər/",
+    "zh": "(n.) AkShare：Python 开源金融数据接口库（专注中国股票/基金/期货等）",
+    "sc": "金融/量化",
+    "dct": "ai",
+    "src": "akshare/量化工具",
+    "ph": [
+      [
+        "akshare interface",
+        "akshare 接口"
+      ],
+      [
+        "akshare data",
+        "akshare 数据"
+      ]
+    ],
+    "se": [
+      [
+        "We fetch A-share historical data via akshare.",
+        "我们通过 akshare 拉取 A 股历史数据。"
+      ],
+      [
+        "akshare provides an open-source alternative to paid terminals.",
+        "akshare 是付费终端的开源替代方案。"
+      ]
+    ]
+  },
+  {
+    "w": "tool_trade_date_hist_sina",
+    "p": "/tuːl treɪd deɪt hɪst ˈsiːnə/",
+    "zh": "(n.) 新浪财经历史交易日数据工具（akshare 工具函数名）",
+    "sc": "金融/量化",
+    "dct": "ai",
+    "src": "akshare/量化工具",
+    "ph": [
+      [
+        "trade date history",
+        "交易日历史"
+      ],
+      [
+        "Sina finance",
+        "新浪财经"
+      ]
+    ],
+    "se": [
+      [
+        "tool_trade_date_hist_sina returns all historical trading dates from Sina Finance.",
+        "tool_trade_date_hist_sina 返回新浪财经的所有历史交易日。"
+      ],
+      [
+        "Call tool_trade_date_hist_sina to fill missing trade dates.",
+        "调用 tool_trade_date_hist_sina 补全缺失的交易日。"
+      ]
+    ]
+  },
+  {
+    "w": "chinese_calendar",
+    "p": "/ˌtʃaɪˈniːz ˈkælɪndər/",
+    "zh": "(n.) 中国日历；农历日历；节假日日历（库/模块名）",
+    "sc": "金融/量化",
+    "dct": "ai",
+    "src": "akshare/量化工具",
+    "ph": [
+      [
+        "Chinese calendar",
+        "中国日历"
+      ],
+      [
+        "lunar calendar",
+        "农历"
+      ]
+    ],
+    "se": [
+      [
+        "Use chinese_calendar to check if a date is a public holiday.",
+        "用 chinese_calendar 检查某天是否为公共假日。"
+      ],
+      [
+        "The chinese_calendar package handles lunar-new-year shifts.",
+        "chinese_calendar 包处理农历新年调休。"
+      ]
+    ]
+  },
+  {
+    "w": "trade_date",
+    "p": "/treɪd deɪt/",
+    "zh": "(n.) 交易日；交易日期",
+    "sc": "金融/量化",
+    "dct": "ai",
+    "src": "akshare/量化工具",
+    "ph": [
+      [
+        "trade date calendar",
+        "交易日历"
+      ],
+      [
+        "next trade date",
+        "下一交易日"
+      ]
+    ],
+    "se": [
+      [
+        "Only include trade_date rows when calculating returns.",
+        "计算收益时只保留 trade_date 行。"
+      ],
+      [
+        "2026-01-01 is not a valid trade_date in China.",
+        "2026-01-01 在中国不是有效交易日。"
+      ]
+    ]
+  },
+  {
+    "w": "hist",
+    "p": "/hɪst/",
+    "zh": "(n.) 历史；历史数据（history 的常用缩写）；(abbr.) historical",
+    "sc": "金融/量化",
+    "dct": "ai",
+    "src": "akshare/量化工具",
+    "ph": [
+      [
+        "hist data",
+        "历史数据"
+      ],
+      [
+        "price hist",
+        "价格历史"
+      ]
+    ],
+    "se": [
+      [
+        "The hist column contains past price records.",
+        "hist 列存放过去的价格记录。"
+      ],
+      [
+        "tool_trade_date_hist_sina downloads historical trade dates.",
+        "tool_trade_date_hist_sina 下载历史交易日。"
+      ]
+    ]
   }
 ];
 window.VOCAB_SCHED = {
@@ -5404,6 +5572,12 @@ window.VOCAB_SCHED = {
     "captures",
     "targets",
     "actual",
-    "compare"
+    "compare",
+    "cn_stock_holidays",
+    "akshare",
+    "tool_trade_date_hist_sina",
+    "chinese_calendar",
+    "trade_date",
+    "hist"
   ]
 };
