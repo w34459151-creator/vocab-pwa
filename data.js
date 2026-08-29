@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "17";
+window.VOCAB_VERSION = "18";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -4975,6 +4975,114 @@ window.VOCAB_LIB = [
         "把新行追加到文件末尾。"
       ]
     ]
+  },
+  {
+    "w": "captures",
+    "p": "/ˈkæptʃərz/",
+    "zh": "(n.) 捕获物；抓取内容；截图（media-fetcher 语境指采集到的数据/画面）",
+    "sc": "media-fetcher/开发",
+    "dct": "dev",
+    "src": "AI 工具提示语",
+    "ph": [
+      [
+        "current captures",
+        "当前抓取"
+      ],
+      [
+        "screen captures",
+        "屏幕截图"
+      ]
+    ],
+    "se": [
+      [
+        "Let me see the actual current captures.",
+        "让我看看实际的当前抓取内容。"
+      ],
+      [
+        "The captures are stored in the sync folder.",
+        "抓取内容存放在 sync 目录。"
+      ]
+    ]
+  },
+  {
+    "w": "targets",
+    "p": "/ˈtɑːrɡɪts/",
+    "zh": "(n.) 目标；对标项；监控对象",
+    "sc": "media-fetcher/开发",
+    "dct": "dev",
+    "src": "AI 工具提示语",
+    "ph": [
+      [
+        "target list",
+        "目标清单"
+      ],
+      [
+        "monitoring targets",
+        "监控目标"
+      ]
+    ],
+    "se": [
+      [
+        "Compare the captures against the targets.",
+        "把抓取内容和目标项做对比。"
+      ]
+    ]
+  },
+  {
+    "w": "actual",
+    "p": "/ˈæktʃuəl/",
+    "zh": "(adj.) 实际的；真实的；当前的",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
+    "ph": [
+      [
+        "actual result",
+        "实际结果"
+      ],
+      [
+        "in actual use",
+        "在实际使用中"
+      ]
+    ],
+    "se": [
+      [
+        "Show me the actual current captures.",
+        "给我看实际的当前抓取。"
+      ],
+      [
+        "The actual value differs from the estimate.",
+        "实际数值与估算不同。"
+      ]
+    ]
+  },
+  {
+    "w": "compare",
+    "p": "/kəmˈper/",
+    "zh": "(v.) 比较；对比",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "",
+    "ph": [
+      [
+        "compare with",
+        "与…相比"
+      ],
+      [
+        "compare against",
+        "与…对比/对标"
+      ]
+    ],
+    "se": [
+      [
+        "Compare them against the targets.",
+        "把它们和目标项对比。"
+      ],
+      [
+        "We compare two models side by side.",
+        "我们把两个模型并排对比。"
+      ]
+    ]
   }
 ];
 window.VOCAB_SCHED = {
@@ -5292,6 +5400,10 @@ window.VOCAB_SCHED = {
     "solutions",
     "subtitle",
     "manifest",
-    "append"
+    "append",
+    "captures",
+    "targets",
+    "actual",
+    "compare"
   ]
 };
