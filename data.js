@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "21";
+window.VOCAB_VERSION = "22";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -5539,6 +5539,194 @@ window.VOCAB_LIB = [
         "一条失效的流水线静默浪费了 6 个视频。"
       ]
     ]
+  },
+  {
+    "w": "Architect",
+    "p": "/ˈɑːrkɪtekt/",
+    "zh": "(n.) 架构师；（Cline 等 AI 工具）先规划设计再实现的模式",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "Cline 工作模式界面",
+    "ph": [
+      [
+        "Architect mode",
+        "架构师模式"
+      ]
+    ],
+    "se": [
+      [
+        "Switch to Architect mode to design before coding.",
+        "切到 Architect 模式，先设计再写代码。"
+      ],
+      [
+        "The Architect mode plans and designs before implementation.",
+        "Architect 模式在实现前进行规划和设计。"
+      ]
+    ]
+  },
+  {
+    "w": "implementation",
+    "p": "/ˌɪmplɪmenˈteɪʃn/",
+    "zh": "(n.) 实现；实施；执行",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "Cline 工作模式界面",
+    "ph": [
+      [
+        "before implementation",
+        "在实现前"
+      ],
+      [
+        "implementation details",
+        "实现细节"
+      ]
+    ],
+    "se": [
+      [
+        "Plan and design before implementation.",
+        "在实现前先做规划和设计。"
+      ],
+      [
+        "The implementation phase starts after the design is approved.",
+        "实现阶段在设计获批后开始。"
+      ]
+    ]
+  },
+  {
+    "w": "Debug",
+    "p": "/ˌdiːˈbʌɡ/",
+    "zh": "(v.) 调试；除错；(n.) 调试模式（Cline 等 AI 工具）",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "Cline 工作模式界面",
+    "ph": [
+      [
+        "debug mode",
+        "调试模式"
+      ],
+      [
+        "debug log",
+        "调试日志"
+      ]
+    ],
+    "se": [
+      [
+        "Use Debug mode to diagnose and fix software issues.",
+        "用 Debug 模式诊断并修复软件问题。"
+      ],
+      [
+        "We spent an hour debugging the failing test.",
+        "我们花了一小时调试失败的测试。"
+      ]
+    ]
+  },
+  {
+    "w": "diagnose",
+    "p": "/ˌdaɪəɡˈnoʊs/",
+    "zh": "(v.) 诊断；判断（问题原因）",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "Cline 工作模式界面",
+    "ph": [
+      [
+        "diagnose a problem",
+        "诊断问题"
+      ],
+      [
+        "diagnose issues",
+        "诊断问题"
+      ]
+    ],
+    "se": [
+      [
+        "Debug mode helps diagnose software issues.",
+        "Debug 模式帮助诊断软件问题。"
+      ],
+      [
+        "Can you diagnose why the build fails?",
+        "你能诊断构建失败的原因吗？"
+      ]
+    ]
+  },
+  {
+    "w": "Orchestrator",
+    "p": "/ˈɔːrkɪstreɪtər/",
+    "zh": "(n.) 编排器；协调者；（Cline 等 AI 工具）跨多种模式协调任务的模式",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "Cline 工作模式界面",
+    "ph": [
+      [
+        "Orchestrator mode",
+        "编排器模式"
+      ]
+    ],
+    "se": [
+      [
+        "Orchestrator mode coordinates tasks across multiple modes.",
+        "Orchestrator 模式跨多种模式协调任务。"
+      ],
+      [
+        "The orchestrator delegates work to Architect and Code modes.",
+        "编排器把任务分派给 Architect 和 Code 模式。"
+      ]
+    ]
+  },
+  {
+    "w": "coordinate",
+    "p": "/koʊˈɔːrdɪneɪt/",
+    "zh": "(v.) 协调；配合；使一致；(n.) 坐标",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "Cline 工作模式界面",
+    "ph": [
+      [
+        "coordinate tasks",
+        "协调任务"
+      ],
+      [
+        "coordinate with",
+        "与…协调"
+      ]
+    ],
+    "se": [
+      [
+        "Orchestrator coordinates tasks across multiple modes.",
+        "Orchestrator 跨多种模式协调任务。"
+      ],
+      [
+        "We need to coordinate the frontend and backend schedules.",
+        "我们需要协调前端和后端的进度。"
+      ]
+    ]
+  },
+  {
+    "w": "refactor",
+    "p": "/ˌriːˈfæktər/",
+    "zh": "(v.) 重构（代码）；改写以提升结构而不改变外部行为；(n.) 重构",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "Cline 工作模式界面",
+    "ph": [
+      [
+        "refactor code",
+        "重构代码"
+      ],
+      [
+        "code refactoring",
+        "代码重构"
+      ]
+    ],
+    "se": [
+      [
+        "Code mode can write, modify, and refactor code.",
+        "Code 模式可以编写、修改和重构代码。"
+      ],
+      [
+        "We refactored the legacy module into smaller functions.",
+        "我们把遗留模块重构成更小的函数。"
+      ]
+    ]
   }
 ];
 window.VOCAB_SCHED = {
@@ -5681,6 +5869,13 @@ window.VOCAB_SCHED = {
     "DeepSeek-API",
     "python-docx",
     "ffmpeg",
-    "remote"
+    "remote",
+    "Architect",
+    "implementation",
+    "Debug",
+    "diagnose",
+    "Orchestrator",
+    "coordinate",
+    "refactor"
   ]
 };
