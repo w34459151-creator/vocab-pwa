@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "22";
+window.VOCAB_VERSION = "23";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -5727,6 +5727,170 @@ window.VOCAB_LIB = [
         "我们把遗留模块重构成更小的函数。"
       ]
     ]
+  },
+  {
+    "w": "Reasoning Effort",
+    "p": "/ˈriːzənɪŋ ˈefərt/",
+    "zh": "(n.) 推理强度；推理努力程度（Cline 模型设置项，控制模型思考深度）",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "Cline 模型配置界面",
+    "ph": [
+      [
+        "Reasoning Effort",
+        "推理强度"
+      ],
+      [
+        "high effort",
+        "高强度"
+      ]
+    ],
+    "se": [
+      [
+        "Set Reasoning Effort to High for deeper planning.",
+        "把 Reasoning Effort 设为 High，以获得更深入的规划。"
+      ],
+      [
+        "Higher Reasoning Effort improves depth but uses more tokens.",
+        "更高的 Reasoning Effort 提升深度，但会消耗更多 token。"
+      ]
+    ]
+  },
+  {
+    "w": "complex prompts",
+    "p": "/kəmˈpleks prɑːmpts/",
+    "zh": "(n.) 复杂提示；复杂提示词",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "Cline 模型配置界面",
+    "ph": [
+      [
+        "complex prompt engineering",
+        "复杂提示工程"
+      ]
+    ],
+    "se": [
+      [
+        "Cline uses complex prompts, so behavior can vary across models.",
+        "Cline 使用复杂提示，因此不同模型表现可能不同。"
+      ],
+      [
+        "Complex prompts require capable models to follow.",
+        "复杂提示需要能力较强的模型才能遵循。"
+      ]
+    ]
+  },
+  {
+    "w": "persist",
+    "p": "/pərˈsɪst/",
+    "zh": "(v.) 持久化；保持；持续存在",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "Cline 模型配置界面",
+    "ph": [
+      [
+        "persist data",
+        "持久化数据"
+      ],
+      [
+        "persist across sessions",
+        "跨会话保持"
+      ]
+    ],
+    "se": [
+      [
+        "Switching between Plan and Act mode will persist the API and model used in the previous mode.",
+        "在 Plan 和 Act 模式之间切换时，会保留上一模式使用的 API 和模型。"
+      ],
+      [
+        "Make settings persist across sessions.",
+        "让设置在会话之间保持。"
+      ]
+    ]
+  },
+  {
+    "w": "Plan and Act modes",
+    "p": "/plæn ənd ækt moʊdz/",
+    "zh": "(n.) 规划与执行模式（Cline 的双模式工作流）",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "Cline 模型配置界面",
+    "ph": [
+      [
+        "Plan mode",
+        "规划模式"
+      ],
+      [
+        "Act mode",
+        "执行模式"
+      ]
+    ],
+    "se": [
+      [
+        "Use different models for Plan and Act modes.",
+        "为 Plan 和 Act 模式使用不同模型。"
+      ],
+      [
+        "A strong model architects in Plan mode; a cheaper model acts in Act mode.",
+        "强模型在 Plan 模式做架构设计，便宜模型在 Act 模式执行。"
+      ]
+    ]
+  },
+  {
+    "w": "reasoning model",
+    "p": "/ˈriːzənɪŋ ˈmɑːdl/",
+    "zh": "(n.) 推理模型；擅长逻辑推理的模型",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "Cline 模型配置界面",
+    "ph": [
+      [
+        "strong reasoning model",
+        "强推理模型"
+      ],
+      [
+        "reasoning capability",
+        "推理能力"
+      ]
+    ],
+    "se": [
+      [
+        "Use a strong reasoning model to architect a plan.",
+        "用强推理模型来架构规划。"
+      ],
+      [
+        "Reasoning models are slower but better at math and logic.",
+        "推理模型更慢，但在数学和逻辑上更强。"
+      ]
+    ]
+  },
+  {
+    "w": "coding model",
+    "p": "/ˈkoʊdɪŋ ˈmɑːdl/",
+    "zh": "(n.) 编程模型；擅长写代码的模型",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "Cline 模型配置界面",
+    "ph": [
+      [
+        "coding assistant",
+        "编程助手"
+      ],
+      [
+        "coding model",
+        "代码模型"
+      ]
+    ],
+    "se": [
+      [
+        "A cheaper coding model can act on the plan.",
+        "便宜的编程模型可以按计划执行写代码。"
+      ],
+      [
+        "Choose a fast coding model for routine edits.",
+        "日常编辑选速度快的编程模型。"
+      ]
+    ]
   }
 ];
 window.VOCAB_SCHED = {
@@ -5876,6 +6040,12 @@ window.VOCAB_SCHED = {
     "diagnose",
     "Orchestrator",
     "coordinate",
-    "refactor"
+    "refactor",
+    "Reasoning Effort",
+    "complex prompts",
+    "persist",
+    "Plan and Act modes",
+    "reasoning model",
+    "coding model"
   ]
 };
