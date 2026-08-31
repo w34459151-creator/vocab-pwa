@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "23";
+window.VOCAB_VERSION = "24";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -5891,6 +5891,174 @@ window.VOCAB_LIB = [
         "日常编辑选速度快的编程模型。"
       ]
     ]
+  },
+  {
+    "w": "open_source",
+    "p": "/ˌoʊpən ˈsɔːrs/",
+    "zh": "(adj.) 开源的；开放源代码的",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "词力 PWA 功能标签",
+    "ph": [
+      [
+        "open-source software",
+        "开源软件"
+      ],
+      [
+        "open source license",
+        "开源许可证"
+      ]
+    ],
+    "se": [
+      [
+        "The vocab app is open source and self-hostable.",
+        "这个背单词应用是开源的，可以自托管。"
+      ],
+      [
+        "Open source projects welcome community contributions.",
+        "开源项目欢迎社区贡献。"
+      ]
+    ]
+  },
+  {
+    "w": "offline_first",
+    "p": "/ˌɔːflaɪn ˈfɜːrst/",
+    "zh": "(adj.) 离线优先的（架构理念：先保证离线可用，再联网同步）",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "词力 PWA 功能标签",
+    "ph": [
+      [
+        "offline-first architecture",
+        "离线优先架构"
+      ],
+      [
+        "offline first",
+        "离线优先"
+      ]
+    ],
+    "se": [
+      [
+        "The PWA is offline-first so it works without a connection.",
+        "这个 PWA 是离线优先的，没网也能用。"
+      ],
+      [
+        "Offline-first design caches data locally first.",
+        "离线优先设计先把数据缓存在本地。"
+      ]
+    ]
+  },
+  {
+    "w": "real_world",
+    "p": "/ˈriːəl wɜːrld/",
+    "zh": "(adj.) 真实世界的；实际场景的；非虚构的",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "词力 PWA 功能标签",
+    "ph": [
+      [
+        "real-world English",
+        "真实场景英语"
+      ],
+      [
+        "real-world use",
+        "实际运用"
+      ]
+    ],
+    "se": [
+      [
+        "We learn real-world English from daily AI tool usage.",
+        "我们从日常使用 AI 工具中学习真实场景英语。"
+      ],
+      [
+        "Real-world examples make vocabulary stick.",
+        "真实语境的例子让单词更好记。"
+      ]
+    ]
+  },
+  {
+    "w": "personal_vocabulary",
+    "p": "/ˈpɜːrsənl ˌvoʊkəˈbjʊleri/",
+    "zh": "(n.) 个人词库；个人词汇表",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "词力 PWA 功能标签",
+    "ph": [
+      [
+        "personal vocabulary",
+        "个人词库"
+      ],
+      [
+        "build vocabulary",
+        "积累词汇"
+      ]
+    ],
+    "se": [
+      [
+        "The app builds your personal vocabulary from words you meet.",
+        "这个应用从你遇到的词里构建你的个人词库。"
+      ],
+      [
+        "Review your personal vocabulary with spaced repetition.",
+        "用间隔重复复习你的个人词库。"
+      ]
+    ]
+  },
+  {
+    "w": "gamified",
+    "p": "/ˈɡeɪmɪfaɪd/",
+    "zh": "(adj.) 游戏化的；带有游戏机制的",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "词力 PWA 功能标签",
+    "ph": [
+      [
+        "gamified practice",
+        "游戏化练习"
+      ],
+      [
+        "gamified learning",
+        "游戏化学习"
+      ]
+    ],
+    "se": [
+      [
+        "Gamified practice keeps learners motivated.",
+        "游戏化练习让学习者保持动力。"
+      ],
+      [
+        "The app uses gamified quizzes to review words.",
+        "这个应用用游戏化测验来复习单词。"
+      ]
+    ]
+  },
+  {
+    "w": "practice",
+    "p": "/ˈpræktɪs/",
+    "zh": "(n./v.) 练习；实践；训练",
+    "sc": "工作/AI工具",
+    "dct": "ai",
+    "src": "词力 PWA 功能标签",
+    "ph": [
+      [
+        "daily practice",
+        "每日练习"
+      ],
+      [
+        "practice mode",
+        "练习模式"
+      ]
+    ],
+    "se": [
+      [
+        "Do your daily practice to retain new words.",
+        "做每日练习来记住新单词。"
+      ],
+      [
+        "Practice makes the vocabulary stick.",
+        "练习让词汇记得更牢。"
+      ]
+    ]
   }
 ];
 window.VOCAB_SCHED = {
@@ -6047,5 +6215,13 @@ window.VOCAB_SCHED = {
     "Plan and Act modes",
     "reasoning model",
     "coding model"
+  ],
+  "2026-09-01": [
+    "open_source",
+    "offline_first",
+    "real_world",
+    "personal_vocabulary",
+    "gamified",
+    "practice"
   ]
 };
