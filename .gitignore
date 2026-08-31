@@ -1,2 +1,25 @@
 node_modules/
 docs/
+
+# ── 安全边界：禁止提交本地凭据/缓存（词力推送铁律）──
+# 1. 环境变量 / 本地密钥
+.env
+.env.*
+*.local
+
+# 2. 本地导出的 token / GitHub 凭据
+*.token
+token.json
+gh_token*
+gh-token*
+
+# 3. 浏览器缓存导出（SW cache / IndexedDB 导出）
+#    注：运行时的浏览器缓存本就不在仓库内，以下仅作本地误提交兜底
+.cache/
+cache/
+*.cache
+service-worker-cache/
+
+# 4. 本地同步暂存（sync/ 数据走远程分支，不进源码）
+sync/local/
+*.sync.json
