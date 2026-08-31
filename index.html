@@ -255,10 +255,14 @@
       <div class="syncstat" id="ghDeviceStatus">等待中…（15 分钟内有效）</div>
     </div>
     <details style="margin-top:8px">
-      <summary style="font-size:13px;color:var(--sub);cursor:pointer">已有 Token？手动粘贴（高级）</summary>
+      <summary style="font-size:13px;color:var(--sub);cursor:pointer">GitHub同步 Token（仅保存在本机浏览器，不上传）</summary>
       <input class="typebox" id="ghTokInp" type="password" placeholder="github_pat_… 或 gho_…" style="margin:6px 0">
-      <button class="bigbtn" onclick="saveGHToken()">保存</button>
-      <button class="bigbtn ghost" onclick="testGHToken()">测试</button>
+      <div style="display:flex;gap:8px;margin:4px 0;flex-wrap:wrap">
+        <button class="bigbtn" onclick="saveGHToken()">保存 Token</button>
+        <button class="bigbtn ghost" onclick="testGHToken()">测试连接</button>
+        <button class="bigbtn ghost" onclick="deleteGHToken()" style="color:#c0392b">删除 Token</button>
+      </div>
+      <div style="font-size:12px;color:var(--sub);margin-top:2px">Token 只存在你这台设备的浏览器里，不会上传给任何人。在公共电脑用完后，记得点「删除 Token」清除残留。</div>
     </details>
   </div>
   <div class="btnrow"><button class="bigbtn" onclick="backHome()">完成</button></div>
@@ -723,6 +727,16 @@ function saveGHToken(){
   if(!v){ if(st){st.textContent='请输入 Token'; st.className='syncstat no';} return; }
   GH_TOKEN=v;
   dbSet('gh_token', v).then(()=>{ if(st){st.textContent='已保存 ✅ Token 仅存本机，练完自动回传'; st.className='syncstat ok';} });
+}
+function deleteGHToken(){
+  const st=document.getElementById('ghTokStatus'); const inp=document.getElementById('ghTokInp');
+  GH_TOKEN=''; if(inp) inp.value='';
+  dbSet('gh_token','').then(()=>{
+    const btn=document.getElementById('ghConnectBtn'), disc=document.getElementById('ghDiscBtn');
+    if(btn) btn.style.display='inline-block';
+    if(disc) disc.style.display='none';
+    if(st){ st.textContent='已删除本机 Token ✅（公共电脑建议退出前清除）'; st.className='syncstat'; }
+  });
 }
 function saveGHRepo(){
   const oi=document.getElementById('ghOwnerInp'), ri=document.getElementById('ghRepoInp'), st=document.getElementById('ghRepoStatus');
