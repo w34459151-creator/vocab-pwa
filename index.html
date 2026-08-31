@@ -231,6 +231,16 @@
   <div class="setrow"><span>答对音效 + 动画</span><input type="checkbox" id="soundCb" onchange="toggleSound(this.checked)"></div>
   <div class="setrow col"><span>📤 自动回传</span>
     <div class="syncstat" id="ghTokStatus">未配置：未连接 GitHub（点击下方按钮在电脑上完成授权）</div>
+    <div class="setrow col" style="margin-top:10px;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:10px">
+      <span>📡 回传仓库（隔离，填你自己的 GitHub）</span>
+      <input class="typebox" id="ghOwnerInp" type="text" placeholder="GitHub 用户名（owner）" style="margin:4px 0">
+      <input class="typebox" id="ghRepoInp" type="text" placeholder="仓库名（repo，如 vocab-pwa）" style="margin:4px 0">
+      <div style="display:flex;gap:8px;margin:4px 0">
+        <button class="bigbtn" onclick="saveGHRepo()">保存仓库</button>
+        <button class="bigbtn ghost" onclick="testGHRepo()">测试</button>
+      </div>
+      <div class="syncstat" id="ghRepoStatus"></div>
+    </div>
     <div style="display:flex;gap:8px;margin:6px 0">
       <button class="bigbtn" id="ghConnectBtn" onclick="connectGitHub()">🔗 连接 GitHub</button>
       <button class="bigbtn ghost" id="ghDiscBtn" onclick="disconnectGitHub()" style="display:none">断开</button>
@@ -623,6 +633,7 @@ async function qScore(){
   if(se){
     if(sync.ok) se.textContent='✅ 已自动回传，AI 稍后自动合并进度';
     else if(sync.reason==='not-configured') se.textContent='⚠️ 未配置自动回传 Token，请复制结果发我';
+    else if(sync.reason==='repo-not-configured') se.textContent='⚠️ 请先在设置中配置回传仓库（owner/repo）';
     else se.textContent='⚠️ 自动回传失败（'+sync.reason+'），请复制结果发我';
     se.className='syncstat '+(sync.ok?'ok':'no');
   }
@@ -640,6 +651,8 @@ function openSettings(){
   document.getElementById('strictCb').checked=strictMode;
   document.getElementById('soundCb').checked=soundOn;
   const ti=document.getElementById('ghTokInp'); if(ti) ti.value=GH_TOKEN;
+  const oi=document.getElementById('ghOwnerInp'); if(oi) oi.value=GH_OWNER;
+  const ri=document.getElementById('ghRepoInp'); if(ri) ri.value=GH_REPO;
   const btn=document.getElementById('ghConnectBtn'), disc=document.getElementById('ghDiscBtn'), st=document.getElementById('ghTokStatus');
   if(btn && disc){
     if(GH_TOKEN){ btn.style.display='none'; disc.style.display='inline-block'; if(st){st.textContent='✅ 已连接 GitHub（手机端零粘贴，自动同步）'; st.className='syncstat ok';} }
@@ -668,10 +681,22 @@ async function importLib(e){
 }
 
 /* ===== 自动回传（GitHub Contents API，octokit 同款 REST；token 仅存本机 IndexedDB） ===== */
-const GH_OWNER='w34459151-creator', GH_REPO='vocab-pwa', GH_BRANCH='master';
+let GH_OWNER='', GH_REPO='', GH_BRANCH='master';  // 回传目标改由用户在设置中配置（隔离）；旧用户首次打开自动迁移默认值
 const GH_CLIENT_ID = (window.GH_CLIENT_ID || '').trim();
 let GH_TOKEN='';
-async function loadGHToken(){ try{const t=await dbGet('gh_token'); if(t) GH_TOKEN=t;}catch(e){} }
+async function loadGHToken(){
+  try{
+    const t=await dbGet('gh_token'); if(t) GH_TOKEN=t;
+    const o=await dbGet('gh_owner'); if(o) GH_OWNER=o;
+    const r=await dbGet('gh_repo'); if(r) GH_REPO=r;
+    const b=await dbGet('gh_branch'); if(b) GH_BRANCH=b;
+    // 迁移旧值：已有 token 但未配置仓库 → 自动填充作者默认仓库，保持旧用户无感回传
+    if(GH_TOKEN && !o && !r){
+      GH_OWNER='w34459151-creator'; GH_REPO='vocab-pwa'; GH_BRANCH='master';
+      try{ await dbSet('gh_owner',GH_OWNER); await dbSet('gh_repo',GH_REPO); await dbSet('gh_branch',GH_BRANCH); }catch(e){}
+    }
+  }catch(e){}
+}
 function b64u(s){
   if(typeof TextEncoder!=='undefined'){ const b=new TextEncoder().encode(s); let bin='';
     for(let i=0;i<b.length;i++) bin+=String.fromCharCode(b[i]); return btoa(bin); }
@@ -679,6 +704,7 @@ function b64u(s){
 }
 async function autoSyncResult(result){
   if(!GH_TOKEN) return {ok:false, reason:'not-configured'};
+  if(!GH_OWNER || !GH_REPO) return {ok:false, reason:'repo-not-configured'};
   // 文件名加随机后缀防止毫秒级碰撞（同一秒内两次提交会 409）
   const rnd = (typeof crypto!=='undefined' && crypto.randomUUID) ? crypto.randomUUID().slice(0,8) : Math.floor(Math.random()*1e9).toString(36);
   const p='sync/'+todayStr()+'-'+Date.now()+'-'+rnd+'.json';
@@ -697,6 +723,27 @@ function saveGHToken(){
   if(!v){ if(st){st.textContent='请输入 Token'; st.className='syncstat no';} return; }
   GH_TOKEN=v;
   dbSet('gh_token', v).then(()=>{ if(st){st.textContent='已保存 ✅ Token 仅存本机，练完自动回传'; st.className='syncstat ok';} });
+}
+function saveGHRepo(){
+  const oi=document.getElementById('ghOwnerInp'), ri=document.getElementById('ghRepoInp'), st=document.getElementById('ghRepoStatus');
+  const o=(oi.value||'').trim(), r=(ri.value||'').trim();
+  if(!o||!r){ if(st){st.textContent='请填写 owner 和 repo'; st.className='syncstat no';} return; }
+  GH_OWNER=o; GH_REPO=r;
+  Promise.all([dbSet('gh_owner',o), dbSet('gh_repo',r)]).then(()=>{
+    if(st){ st.textContent='✅ 已保存回传仓库：'+o+'/'+r+'（不再回传到作者仓库）'; st.className='syncstat ok'; }
+  });
+}
+async function testGHRepo(){
+  const st=document.getElementById('ghRepoStatus'); if(!st) return;
+  if(!GH_OWNER||!GH_REPO){ st.textContent='请先填写并保存 owner/repo'; st.className='syncstat no'; return; }
+  if(!GH_TOKEN){ st.textContent='请先连接 GitHub（Token）'; st.className='syncstat no'; return; }
+  st.textContent='测试中…'; st.className='syncstat';
+  try{
+    const rr=await fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO,{headers:{'Authorization':'Bearer '+GH_TOKEN,'Accept':'application/vnd.github+json'}});
+    if(rr.ok){ const j=await rr.json(); st.textContent='✅ 仓库可访问：'+(j.full_name||(GH_OWNER+'/'+GH_REPO)); st.className='syncstat ok'; }
+    else if(rr.status===404){ st.textContent='❌ 仓库不存在或无权限（404）'; st.className='syncstat no'; }
+    else { st.textContent='❌ HTTP '+rr.status; st.className='syncstat no'; }
+  }catch(e){ st.textContent='❌ 网络错误：'+(e&&e.message||e); st.className='syncstat no'; }
 }
 async function testGHToken(){
   const st=document.getElementById('ghTokStatus'); if(!st) return;
@@ -1006,7 +1053,7 @@ window.__h={
   get LIB(){return LIB}, get LIBMAP(){return LIBMAP}, get QUIZ(){return QUIZ}, get qcur(){return qcur},
   get DATA(){return DATA}, get streak(){return streak}, get dailyGoal(){return dailyGoal}, get DICT(){return DICT},
   get pendingAdd(){return pendingAdd}, get photoTokens(){return photoTokens},
-  setGHToken(t){GH_TOKEN=t||'';}, getGHToken(){return GH_TOKEN;}, autoSyncResult, b64u,
+  setGHToken(t){GH_TOKEN=t||'';}, getGHToken(){return GH_TOKEN;}, autoSyncResult, b64u, saveGHRepo, testGHRepo,
   goLevel, setRange, renderQuiz, backHome, openSettings, qChoose, qNext, qSubmit, qPrev, setRate, importLib,
   parseImportText, extractEnglish, showPhotoTokens, addPhotoWords, openPhoto, openSpeak,
   setSpeakTab, renderSpeakWords, toggleRecord, showAddResult,
