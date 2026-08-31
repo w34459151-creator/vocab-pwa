@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "24";
+window.VOCAB_VERSION = "25";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -6059,6 +6059,154 @@ window.VOCAB_LIB = [
         "练习让词汇记得更牢。"
       ]
     ]
+  },
+  {
+    "w": "license",
+    "p": "/ˈlaɪsns/",
+    "zh": "(n.) 许可证；执照；授权文件；(v.) 授权；许可",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 创建 LICENSE 文件界面",
+    "ph": [
+      [
+        "open-source license",
+        "开源许可证"
+      ],
+      [
+        "license file",
+        "许可证文件"
+      ],
+      [
+        "MIT license",
+        "MIT 许可证"
+      ]
+    ],
+    "se": [
+      [
+        "Add a LICENSE file when you open-source a project.",
+        "开源项目时要加一个 LICENSE 文件。"
+      ],
+      [
+        "MIT license allows free reuse with attribution.",
+        "MIT 许可证允许在保留声明的前提下自由复用。"
+      ]
+    ]
+  },
+  {
+    "w": "template",
+    "p": "/ˈtempleɪt/",
+    "zh": "(n.) 模板；样板；标准格式",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 创建 LICENSE 文件界面",
+    "ph": [
+      [
+        "license template",
+        "许可证模板"
+      ],
+      [
+        "template file",
+        "模板文件"
+      ]
+    ],
+    "se": [
+      [
+        "GitHub lets you choose a license template.",
+        "GitHub 允许你选择一个许可证模板。"
+      ],
+      [
+        "Use a README template to keep docs consistent.",
+        "用 README 模板保持文档一致。"
+      ]
+    ]
+  },
+  {
+    "w": "preview",
+    "p": "/ˈpriːvjuː/",
+    "zh": "(n./v.) 预览；预演；预先查看",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 创建 LICENSE 文件界面",
+    "ph": [
+      [
+        "preview tab",
+        "预览标签页"
+      ],
+      [
+        "live preview",
+        "实时预览"
+      ]
+    ],
+    "se": [
+      [
+        "Switch to the Preview tab before committing.",
+        "提交前切换到 Preview 标签页看看效果。"
+      ],
+      [
+        "The preview shows how the rendered file will look.",
+        "预览展示了渲染后的文件效果。"
+      ]
+    ]
+  },
+  {
+    "w": "contents",
+    "p": "/ˈkɑːntents/",
+    "zh": "(n.) 内容；目录；所含之物（file contents 指文件内容）",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 创建 LICENSE 文件界面",
+    "ph": [
+      [
+        "file contents",
+        "文件内容"
+      ],
+      [
+        "table of contents",
+        "目录"
+      ]
+    ],
+    "se": [
+      [
+        "Enter the file contents in the text area.",
+        "在文本区域输入文件内容。"
+      ],
+      [
+        "GitHub shows the contents of each committed file.",
+        "GitHub 展示每个已提交文件的内容。"
+      ]
+    ]
+  },
+  {
+    "w": "branch",
+    "p": "/bræntʃ/",
+    "zh": "(n.) 分支（版本控制）；树枝；分部；(v.) 分叉；创建分支",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 创建 LICENSE 文件界面",
+    "ph": [
+      [
+        "gh-pages branch",
+        "gh-pages 分支"
+      ],
+      [
+        "feature branch",
+        "功能分支"
+      ],
+      [
+        "main branch",
+        "主分支"
+      ]
+    ],
+    "se": [
+      [
+        "The LICENSE file is created in the gh-pages branch.",
+        "这个 LICENSE 文件是在 gh-pages 分支里创建的。"
+      ],
+      [
+        "Create a feature branch before making changes.",
+        "改代码前先创建一个功能分支。"
+      ]
+    ]
   }
 ];
 window.VOCAB_SCHED = {
@@ -6222,6 +6370,11 @@ window.VOCAB_SCHED = {
     "real_world",
     "personal_vocabulary",
     "gamified",
-    "practice"
+    "practice",
+    "license",
+    "template",
+    "preview",
+    "contents",
+    "branch"
   ]
 };
