@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "25";
+window.VOCAB_VERSION = "27";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -6207,6 +6207,350 @@ window.VOCAB_LIB = [
         "改代码前先创建一个功能分支。"
       ]
     ]
+  },
+  {
+    "w": "commit_changes",
+    "p": "/kəˈmɪt ˈtʃeɪndʒɪz/",
+    "zh": "(phr.) 提交更改（GitHub 编辑器按钮文案）",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 在线编辑器界面",
+    "ph": [
+      [
+        "commit changes",
+        "提交更改"
+      ],
+      [
+        "commit message",
+        "提交信息"
+      ]
+    ],
+    "se": [
+      [
+        "Click 'Commit changes...' to save the edited file.",
+        "点击「Commit changes...」保存编辑后的文件。"
+      ],
+      [
+        "GitHub shows 'Commit changes...' after you edit a file online.",
+        "在 GitHub 在线编辑文件后会出现「Commit changes...」按钮。"
+      ]
+    ]
+  },
+  {
+    "w": "cancel_changes",
+    "p": "/ˈkænsl ˈtʃeɪndʒɪz/",
+    "zh": "(phr.) 取消更改；放弃修改",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 在线编辑器界面",
+    "ph": [
+      [
+        "cancel changes",
+        "取消更改"
+      ],
+      [
+        "discard changes",
+        "丢弃更改"
+      ]
+    ],
+    "se": [
+      [
+        "Click 'Cancel changes' to discard your edits.",
+        "点击「Cancel changes」放弃你的编辑。"
+      ],
+      [
+        "If you make a mistake, use 'Cancel changes'.",
+        "如果改错了，用「Cancel changes」。"
+      ]
+    ]
+  },
+  {
+    "w": "spaces",
+    "p": "/ˈspeɪsɪz/",
+    "zh": "(n.) 空格；空格缩进（编辑器缩进方式）",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 在线编辑器界面",
+    "ph": [
+      [
+        "spaces for indentation",
+        "空格缩进"
+      ],
+      [
+        "2 spaces",
+        "2 个空格"
+      ]
+    ],
+    "se": [
+      [
+        "Set the editor to use Spaces for indentation.",
+        "设置编辑器使用空格缩进。"
+      ],
+      [
+        "The default is 2 spaces per indent level.",
+        "默认每个缩进层级 2 个空格。"
+      ]
+    ]
+  },
+  {
+    "w": "no_wrap",
+    "p": "/noʊ ræp/",
+    "zh": "(phr.) 不换行（编辑器行宽设置）",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 在线编辑器界面",
+    "ph": [
+      [
+        "no wrap",
+        "不换行"
+      ],
+      [
+        "soft wrap",
+        "软换行"
+      ],
+      [
+        "word wrap",
+        "自动换行"
+      ]
+    ],
+    "se": [
+      [
+        "Select 'No wrap' to keep long lines on one line.",
+        "选择「No wrap」让长行保持在一行内。"
+      ],
+      [
+        "With no wrap, you must scroll horizontally.",
+        "不换行时你需要水平滚动。"
+      ]
+    ]
+  },
+  {
+    "w": "wrap",
+    "p": "/ræp/",
+    "zh": "(v./n.) 包裹；换行；自动换行",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 在线编辑器界面",
+    "ph": [
+      [
+        "word wrap",
+        "自动换行"
+      ],
+      [
+        "soft wrap",
+        "软换行"
+      ],
+      [
+        "wrap text",
+        "文本换行"
+      ]
+    ],
+    "se": [
+      [
+        "Enable word wrap to see the full line without scrolling.",
+        "开启自动换行，不用滚动就能看到整行。"
+      ],
+      [
+        "The editor supports soft wrap and no wrap modes.",
+        "编辑器支持软换行和不换行两种模式。"
+      ]
+    ]
+  },
+  {
+    "w": "public",
+    "p": "/ˈpʌblɪk/",
+    "zh": "(adj.) 公开的；公共的；(n.) 公众；大众",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 仓库主页",
+    "ph": [
+      [
+        "public repository",
+        "公开仓库"
+      ],
+      [
+        "public access",
+        "公开访问"
+      ]
+    ],
+    "se": [
+      [
+        "The vocab-pwa repository is public on GitHub.",
+        "vocab-pwa 仓库在 GitHub 上是公开的。"
+      ],
+      [
+        "Public repos are visible to everyone.",
+        "公开仓库对所有人可见。"
+      ]
+    ]
+  },
+  {
+    "w": "fork",
+    "p": "/fɔːrk/",
+    "zh": "(n.) 复刻；分叉；叉子；(v.) 复刻仓库；分叉",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 仓库主页",
+    "ph": [
+      [
+        "fork a repository",
+        "复刻仓库"
+      ],
+      [
+        "fork count",
+        "复刻数"
+      ]
+    ],
+    "se": [
+      [
+        "Fork the repo to make your own copy.",
+        "Fork 这个仓库，创建你自己的副本。"
+      ],
+      [
+        "A fork keeps a link to the original project.",
+        "复刻会保留与原项目的链接。"
+      ]
+    ]
+  },
+  {
+    "w": "star",
+    "p": "/stɑːr/",
+    "zh": "(n.) 星标；星星；明星；(v.) 标星；收藏（GitHub 语境）",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 仓库主页",
+    "ph": [
+      [
+        "star a repo",
+        "给仓库标星"
+      ],
+      [
+        "star count",
+        "星标数"
+      ]
+    ],
+    "se": [
+      [
+        "Give the project a star if you find it useful.",
+        "如果觉得项目有用，可以给它点个星。"
+      ],
+      [
+        "The repo has 0 stars so far.",
+        "这个仓库目前还没有星标。"
+      ]
+    ]
+  },
+  {
+    "w": "watch",
+    "p": "/wɑːtʃ/",
+    "zh": "(v./n.) 关注；观看；监视（GitHub 中 watch 仓库即接收动态通知）",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 仓库主页",
+    "ph": [
+      [
+        "watch repository",
+        "关注仓库"
+      ],
+      [
+        "watching count",
+        "关注数"
+      ]
+    ],
+    "se": [
+      [
+        "Watch the repo to get notified of new commits.",
+        "关注仓库以接收新提交通知。"
+      ],
+      [
+        "You can watch, star, or fork a project.",
+        "你可以关注、标星或复刻一个项目。"
+      ]
+    ]
+  },
+  {
+    "w": "releases",
+    "p": "/rɪˈliːsɪz/",
+    "zh": "(n.) 发布版本；发行版（GitHub Releases）",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 仓库主页",
+    "ph": [
+      [
+        "GitHub releases",
+        "GitHub 发布版本"
+      ],
+      [
+        "create a release",
+        "创建发布"
+      ]
+    ],
+    "se": [
+      [
+        "There are no releases published yet.",
+        "目前还没有发布任何版本。"
+      ],
+      [
+        "Create a new release to tag a stable version.",
+        "创建一个 release 来标记稳定版本。"
+      ]
+    ]
+  },
+  {
+    "w": "deployments",
+    "p": "/dɪˈplɔɪmənts/",
+    "zh": "(n.) 部署；部署记录",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 仓库主页",
+    "ph": [
+      [
+        "deployment history",
+        "部署历史"
+      ],
+      [
+        "latest deployment",
+        "最新部署"
+      ]
+    ],
+    "se": [
+      [
+        "GitHub Pages shows 27 deployments for this repo.",
+        "GitHub Pages 显示这个仓库有 27 次部署。"
+      ],
+      [
+        "The latest deployment happened 3 minutes ago.",
+        "最近一次部署发生在 3 分钟前。"
+      ]
+    ]
+  },
+  {
+    "w": "contributors",
+    "p": "/kənˈtrɪbjətərz/",
+    "zh": "(n.) 贡献者；投稿人",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 仓库主页",
+    "ph": [
+      [
+        "project contributors",
+        "项目贡献者"
+      ],
+      [
+        "top contributors",
+        "主要贡献者"
+      ]
+    ],
+    "se": [
+      [
+        "The contributors section shows who has committed code.",
+        "贡献者区域显示谁提交过代码。"
+      ],
+      [
+        "This project has 1 contributor so far.",
+        "这个项目目前只有 1 位贡献者。"
+      ]
+    ]
   }
 ];
 window.VOCAB_SCHED = {
@@ -6375,6 +6719,18 @@ window.VOCAB_SCHED = {
     "template",
     "preview",
     "contents",
-    "branch"
+    "branch",
+    "commit_changes",
+    "cancel_changes",
+    "spaces",
+    "no_wrap",
+    "wrap",
+    "public",
+    "fork",
+    "star",
+    "watch",
+    "releases",
+    "deployments",
+    "contributors"
   ]
 };
