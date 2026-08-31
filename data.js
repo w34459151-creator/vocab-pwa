@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "27";
+window.VOCAB_VERSION = "28";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -6551,6 +6551,34 @@ window.VOCAB_LIB = [
         "这个项目目前只有 1 位贡献者。"
       ]
     ]
+  },
+  {
+    "w": "contribute",
+    "p": "/kənˈtrɪbjuːt/",
+    "zh": "(v.) 贡献；投稿；参与贡献；(n.) Contribute（GitHub 仓库顶部的贡献下拉按钮）",
+    "sc": "开发/Git",
+    "dct": "dev",
+    "src": "GitHub 仓库界面截图",
+    "ph": [
+      [
+        "Contribute button",
+        "GitHub 贡献按钮"
+      ],
+      [
+        "contribute to",
+        "为…做贡献/贡献给…"
+      ]
+    ],
+    "se": [
+      [
+        "Click the Contribute button to open a pull request or create a new issue.",
+        "点击 Contribute 按钮发起 Pull Request 或创建新 Issue。"
+      ],
+      [
+        "You can contribute to the project by submitting bug fixes.",
+        "你可以通过提交 bug 修复来为项目做贡献。"
+      ]
+    ]
   }
 ];
 window.VOCAB_SCHED = {
@@ -6731,6 +6759,7 @@ window.VOCAB_SCHED = {
     "watch",
     "releases",
     "deployments",
-    "contributors"
+    "contributors",
+    "contribute"
   ]
 };
