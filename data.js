@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "28";
+window.VOCAB_VERSION = "31";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -6579,6 +6579,398 @@ window.VOCAB_LIB = [
         "你可以通过提交 bug 修复来为项目做贡献。"
       ]
     ]
+  },
+  {
+    "w": "datasets",
+    "p": "/ˈdeɪtəsets/",
+    "zh": "(n.) 数据集（AI/ML 训练或评估数据的集合；dataset 的复数）",
+    "sc": "AI/ML",
+    "dct": "ai",
+    "src": "Hugging Face 注册页截图（huggingface.co/join）",
+    "ph": [
+      [
+        "search datasets",
+        "搜索数据集"
+      ],
+      [
+        "Hugging Face Datasets",
+        "HF 平台的数据集板块"
+      ]
+    ],
+    "se": [
+      [
+        "Search models, datasets, users…",
+        "搜索模型、数据集、用户…"
+      ],
+      [
+        "Hugging Face hosts millions of datasets for NLP tasks.",
+        "Hugging Face 托管了数百万用于 NLP 任务的数据集。"
+      ]
+    ]
+  },
+  {
+    "w": "Spaces",
+    "p": "/speɪsɪz/",
+    "zh": "(n.) Hugging Face Spaces — HF 平台的在线 AI 应用托管服务（用 Gradio/Streamlit/Static 模板一键部署）",
+    "sc": "AI/ML",
+    "dct": "ai",
+    "src": "Hugging Face 注册页截图（huggingface.co/join）",
+    "ph": [
+      [
+        "HF Spaces",
+        "Hugging Face Spaces"
+      ],
+      [
+        "Spaces tab",
+        "HF 顶部导航的 Spaces 标签"
+      ]
+    ],
+    "se": [
+      [
+        "Search models, datasets, users…",
+        "搜索模型、数据集、用户…（HF 顶部主导航）"
+      ],
+      [
+        "We deployed our chatbot on Hugging Face Spaces for free.",
+        "我们把聊天机器人免费部署到了 Hugging Face Spaces。"
+      ]
+    ]
+  },
+  {
+    "w": "community",
+    "p": "/kəˈmjuːnəti/",
+    "zh": "(n.) 社区；社群；（有共同兴趣的）群体",
+    "sc": "工作/技术",
+    "dct": "common",
+    "src": "Hugging Face 注册页截图（huggingface.co/join）",
+    "ph": [
+      [
+        "community of learners",
+        "学习者社群"
+      ],
+      [
+        "open-source community",
+        "开源社区"
+      ]
+    ],
+    "se": [
+      [
+        "Join the community of machine learners!",
+        "加入机器学习者社群！"
+      ],
+      [
+        "The open-source community contributes millions of models.",
+        "开源社区贡献了数百万模型。"
+      ]
+    ]
+  },
+  {
+    "w": "organization",
+    "p": "/ˌɔːrɡənəˈzeɪʃn/",
+    "zh": "(n.) 组织；机构；社团（常缩写为 org）",
+    "sc": "工作/技术",
+    "dct": "common",
+    "src": "Hugging Face 注册页截图（huggingface.co/join）",
+    "ph": [
+      [
+        "company/team org",
+        "公司/团队组织"
+      ],
+      [
+        "organization email",
+        "企业邮箱"
+      ]
+    ],
+    "se": [
+      [
+        "Use your organization email to easily find and join your company/team org.",
+        "使用你的企业邮箱，可轻松查找并加入你的公司/团队组织。"
+      ],
+      [
+        "Each organization on Hugging Face has its own model registry.",
+        "Hugging Face 上每个组织都有自己的模型仓库。"
+      ]
+    ]
+  },
+  {
+    "w": "visibility",
+    "p": "/ˌvɪzəˈbɪləti/",
+    "zh": "(n.) 可见性；可见度；（在社交/搜索结果中的）曝光度",
+    "sc": "工作/IT",
+    "dct": "common",
+    "src": "GitHub 仓库 Settings → Danger Zone 截图",
+    "ph": [
+      [
+        "Change visibility",
+        "更改可见性"
+      ],
+      [
+        "public/private visibility",
+        "公开/私有可见性"
+      ]
+    ],
+    "se": [
+      [
+        "Change repository visibility.",
+        "更改仓库可见性。"
+      ],
+      [
+        "This repository is currently private.",
+        "本仓库当前为私有。"
+      ]
+    ]
+  },
+  {
+    "w": "archive",
+    "p": "/ˈɑːrkaɪv/",
+    "zh": "(v.) 归档；存档；(n.) 档案；归档目录",
+    "sc": "工作/IT",
+    "dct": "common",
+    "src": "GitHub 仓库 Settings → Danger Zone 截图",
+    "ph": [
+      [
+        "Archive this repository",
+        "归档此仓库"
+      ],
+      [
+        "archived repo",
+        "已归档仓库（GitHub 标签）"
+      ]
+    ],
+    "se": [
+      [
+        "Archive this repository.",
+        "归档此仓库。"
+      ],
+      [
+        "Mark this repository as archived and read-only.",
+        "将此仓库标记为已归档且只读。"
+      ]
+    ]
+  },
+  {
+    "w": "archived",
+    "p": "/ˈɑːrkaɪvd/",
+    "zh": "(adj.) 已归档的；存档的；（仓库/项目）标记为只读不再维护",
+    "sc": "工作/IT",
+    "dct": "common",
+    "src": "GitHub 仓库 Settings → Danger Zone 截图",
+    "ph": [
+      [
+        "archived repository",
+        "已归档仓库"
+      ],
+      [
+        "archived PR",
+        "已归档 PR（GitHub）"
+      ]
+    ],
+    "se": [
+      [
+        "Mark this repository as archived and read-only.",
+        "将此仓库标记为已归档且只读。"
+      ],
+      [
+        "The project was archived in 2023.",
+        "该项目于 2023 年被归档。"
+      ]
+    ]
+  },
+  {
+    "w": "delete",
+    "p": "/dɪˈliːt/",
+    "zh": "(v.) 删除；移除；划掉",
+    "sc": "工作/IT",
+    "dct": "common",
+    "src": "GitHub 仓库 Settings → Danger Zone 截图",
+    "ph": [
+      [
+        "Delete this repository",
+        "删除此仓库（GitHub 终态操作）"
+      ],
+      [
+        "soft delete",
+        "软删除（可恢复）"
+      ],
+      [
+        "hard delete",
+        "硬删除（不可恢复）"
+      ]
+    ],
+    "se": [
+      [
+        "Delete this repository.",
+        "删除此仓库。"
+      ],
+      [
+        "Once you delete a repository, there is no going back. Please be certain.",
+        "仓库一旦删除便无法恢复，请务必确认。"
+      ]
+    ]
+  },
+  {
+    "w": "disable",
+    "p": "/dɪsˈeɪbl/",
+    "zh": "(v.) 禁用；停用；使失效",
+    "sc": "工作/IT",
+    "dct": "common",
+    "src": "GitHub 仓库 Settings → Danger Zone 截图",
+    "ph": [
+      [
+        "disable rules",
+        "禁用规则"
+      ],
+      [
+        "disable enforcement",
+        "禁用强制实施"
+      ]
+    ],
+    "se": [
+      [
+        "Disable branch protection rules.",
+        "禁用分支保护规则。"
+      ],
+      [
+        "Disable branch protection rules enforcement and APIs.",
+        "禁用分支保护规则的强制实施与 API。"
+      ]
+    ]
+  },
+  {
+    "w": "enforcement",
+    "p": "/ɪnˈfɔːrsmənt/",
+    "zh": "(n.) 强制实施；执行；生效",
+    "sc": "工作/IT",
+    "dct": "common",
+    "src": "GitHub 仓库 Settings → Danger Zone 截图",
+    "ph": [
+      [
+        "rules enforcement",
+        "规则强制实施"
+      ],
+      [
+        "law enforcement",
+        "执法"
+      ]
+    ],
+    "se": [
+      [
+        "Disable branch protection rules enforcement and APIs.",
+        "禁用分支保护规则的强制实施与 API。"
+      ],
+      [
+        "Policy enforcement is automatic.",
+        "策略自动强制实施。"
+      ]
+    ]
+  },
+  {
+    "w": "ownership",
+    "p": "/ˈoʊnərʃɪp/",
+    "zh": "(n.) 所有权；产权；主体责任",
+    "sc": "工作/IT",
+    "dct": "common",
+    "src": "GitHub 仓库 Settings → Danger Zone 截图",
+    "ph": [
+      [
+        "Transfer ownership",
+        "转让所有权"
+      ],
+      [
+        "code ownership",
+        "代码归属（谁负责维护）"
+      ]
+    ],
+    "se": [
+      [
+        "Transfer ownership.",
+        "转让所有权。"
+      ],
+      [
+        "Transfer this repository to another user or to an organization where you have the ability to create repositories.",
+        "将此仓库转让给其他用户或你有权在其中创建仓库的组织。"
+      ]
+    ]
+  },
+  {
+    "w": "Danger Zone",
+    "p": "/ˈdeɪndʒər zoʊn/",
+    "zh": "(n.) 危险区域；（网站/系统界面里的）红色高危操作区",
+    "sc": "工作/IT",
+    "dct": "common",
+    "src": "GitHub 仓库 Settings → Danger Zone 截图",
+    "ph": [
+      [
+        "Danger Zone",
+        "危险区域"
+      ],
+      [
+        "enter the Danger Zone",
+        "进入危险区域（警示语）"
+      ]
+    ],
+    "se": [
+      [
+        "Danger Zone",
+        "危险区域"
+      ],
+      [
+        "Settings → Danger Zone",
+        "设置 → 危险操作区"
+      ]
+    ]
+  },
+  {
+    "w": "branch protection rules",
+    "p": "/bræntʃ prəˈtekʃn ruːlz/",
+    "zh": "(n.) 分支保护规则（GitHub 在 main/master 等关键分支上强制要求的合并前检查，如必须 PR 审查/通过 CI）",
+    "sc": "工作/IT/Git",
+    "dct": "dev",
+    "src": "GitHub 仓库 Settings → Danger Zone 截图",
+    "ph": [
+      [
+        "branch protection",
+        "分支保护"
+      ],
+      [
+        "main branch protection",
+        "主干分支保护"
+      ]
+    ],
+    "se": [
+      [
+        "Disable branch protection rules.",
+        "禁用分支保护规则。"
+      ],
+      [
+        "Disable branch protection rules enforcement and APIs.",
+        "禁用分支保护规则的强制实施与 API。"
+      ]
+    ]
+  },
+  {
+    "w": "codebase",
+    "p": "/ˈkoʊdbeɪs/",
+    "zh": "(n.) 代码库；代码基础（一个软件项目的全部源代码集合）",
+    "sc": "AI工具/Claude",
+    "dct": "ai",
+    "src": "Claude 产品说明",
+    "ph": [
+      [
+        "entire codebase 整个代码库",
+        ""
+      ],
+      [
+        "codebase analysis 代码库分析",
+        ""
+      ]
+    ],
+    "se": [
+      [
+        "Claude works directly with your codebase",
+        "Claude 直接在你的代码库上工作"
+      ]
+    ]
   }
 ];
 window.VOCAB_SCHED = {
@@ -6761,5 +7153,8 @@ window.VOCAB_SCHED = {
     "deployments",
     "contributors",
     "contribute"
+  ],
+  "2026-09-09": [
+    "codebase"
   ]
 };
