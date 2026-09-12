@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "33";
+window.VOCAB_VERSION = "34";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -7151,6 +7151,36 @@ window.VOCAB_LIB = [
         "该工具能向追踪器隐藏你的真实 IP 地址"
       ]
     ]
+  },
+  {
+    "w": "LOCATION",
+    "p": "",
+    "zh": "位置；定位；地点",
+    "sc": "设计工具 UI：点击 LOCATION 卡片（红 X 标记）进行定位/位置设置",
+    "dct": "AI",
+    "src": "",
+    "ph": [],
+    "se": []
+  },
+  {
+    "w": "BROWSER",
+    "p": "",
+    "zh": "浏览器",
+    "sc": "设计工具 UI：点击 BROWSER 卡片（红 X 标记）选择浏览器环境",
+    "dct": "AI",
+    "src": "",
+    "ph": [],
+    "se": []
+  },
+  {
+    "w": "SOFTWARE",
+    "p": "",
+    "zh": "软件；应用软件",
+    "sc": "设计工具 UI：点击 SOFTWARE 卡片选择软件类型/环境",
+    "dct": "AI",
+    "src": "",
+    "ph": [],
+    "se": []
   }
 ];
 window.VOCAB_SCHED = {
@@ -7338,6 +7368,9 @@ window.VOCAB_SCHED = {
     "codebase"
   ],
   "2026-09-13": [
-    "cloak"
+    "cloak",
+    "LOCATION",
+    "BROWSER",
+    "SOFTWARE"
   ]
 };
