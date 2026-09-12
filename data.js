@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "34";
+window.VOCAB_VERSION = "35";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -7181,6 +7181,86 @@ window.VOCAB_LIB = [
     "src": "",
     "ph": [],
     "se": []
+  },
+  {
+    "w": "HARDWARE",
+    "p": "",
+    "zh": "硬件",
+    "sc": "iphey.com 检测维度之一：HARDWARE（硬件指纹）",
+    "dct": "AI",
+    "src": "",
+    "ph": [],
+    "se": []
+  },
+  {
+    "w": "NETWORK",
+    "p": "",
+    "zh": "网络",
+    "sc": "iphey.com 检测维度之一：NETWORK（网络信号）",
+    "dct": "AI",
+    "src": "",
+    "ph": [],
+    "se": []
+  },
+  {
+    "w": "BOT",
+    "p": "",
+    "zh": "机器人；爬虫程序",
+    "sc": "iphey.com 检测维度之一：BOT（机器人/自动化检测）",
+    "dct": "AI",
+    "src": "",
+    "ph": [],
+    "se": []
+  },
+  {
+    "w": "fingerprint",
+    "p": "",
+    "zh": "指纹；识别指纹",
+    "sc": "browser fingerprint：浏览器指纹，用于追踪和识别用户设备",
+    "dct": "AI",
+    "src": "",
+    "ph": [],
+    "se": []
+  },
+  {
+    "w": "inconsistent",
+    "p": "",
+    "zh": "不一致的；前后矛盾的",
+    "sc": "iphey 信号：Detected an inconsistent browser fingerprint（检测到不一致的浏览器指纹）",
+    "dct": "AI",
+    "src": "",
+    "ph": [],
+    "se": []
+  },
+  {
+    "w": "masked",
+    "p": "",
+    "zh": "被掩盖的；被隐藏的",
+    "sc": "iphey 信号：Detected masked or inconsistent location data（检测到被掩盖或不一致的位置数据）",
+    "dct": "AI",
+    "src": "",
+    "ph": [],
+    "se": []
+  },
+  {
+    "w": "automated",
+    "p": "",
+    "zh": "自动化的",
+    "sc": "iphey 信号：Detected an automated browser environment signal（检测到自动化浏览器环境信号）",
+    "dct": "AI",
+    "src": "",
+    "ph": [],
+    "se": []
+  },
+  {
+    "w": "environment",
+    "p": "",
+    "zh": "环境",
+    "sc": "browser environment：浏览器运行环境（iphey 检测自动化环境信号）",
+    "dct": "AI",
+    "src": "",
+    "ph": [],
+    "se": []
   }
 ];
 window.VOCAB_SCHED = {
@@ -7371,6 +7451,14 @@ window.VOCAB_SCHED = {
     "cloak",
     "LOCATION",
     "BROWSER",
-    "SOFTWARE"
+    "SOFTWARE",
+    "HARDWARE",
+    "NETWORK",
+    "BOT",
+    "fingerprint",
+    "inconsistent",
+    "masked",
+    "automated",
+    "environment"
   ]
 };
