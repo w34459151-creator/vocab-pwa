@@ -1,5 +1,5 @@
 // 由 gen_pwa.js 自动生成，请勿手改。源：~/.workbuddy/vocab-progress.json
-window.VOCAB_VERSION = "31";
+window.VOCAB_VERSION = "33";
 window.GH_CLIENT_ID = "Ov23lihs5yl62Hr3tV1n";
 window.VOCAB_LIB = [
   {
@@ -6971,6 +6971,186 @@ window.VOCAB_LIB = [
         "Claude 直接在你的代码库上工作"
       ]
     ]
+  },
+  {
+    "w": "local network",
+    "p": "/ˈloʊkl ˈnetwɜːrk/",
+    "zh": "(n.) 局域网；本地网络（同一路由器/Wi-Fi 下的设备互联）",
+    "sc": "工作/IT",
+    "dct": "common",
+    "src": "macOS 局域网权限弹窗（claude.ai 请求访问）",
+    "ph": [
+      [
+        "on your local network",
+        "在你的局域网上"
+      ],
+      [
+        "local network permission",
+        "局域网权限（macOS 弹窗）"
+      ]
+    ],
+    "se": [
+      [
+        "claude.ai wants to Access other devices on your local network.",
+        "claude.ai 想访问你局域网上的其他设备。"
+      ],
+      [
+        "Allow access to your local network.",
+        "允许访问你的局域网。"
+      ]
+    ]
+  },
+  {
+    "w": "access",
+    "p": "/ˈækses/",
+    "zh": "(v.) 访问；进入；获取权限；(n.) 访问权；入口",
+    "sc": "工作/IT",
+    "dct": "common",
+    "src": "macOS 局域网权限弹窗（claude.ai 请求访问）",
+    "ph": [
+      [
+        "access to",
+        "对…的访问权"
+      ],
+      [
+        "grant/deny access",
+        "授予/拒绝访问"
+      ],
+      [
+        "remote access",
+        "远程访问"
+      ]
+    ],
+    "se": [
+      [
+        "claude.ai wants to Access other devices on your local network.",
+        "claude.ai 想访问你局域网上的其他设备。"
+      ],
+      [
+        "You have been granted access to the repository.",
+        "你已获得该仓库的访问权限。"
+      ]
+    ]
+  },
+  {
+    "w": "device",
+    "p": "/dɪˈvaɪs/",
+    "zh": "(n.) 设备；装置；终端（手机/电脑/物联网硬件等）",
+    "sc": "工作/IT",
+    "dct": "common",
+    "src": "macOS 局域网权限弹窗（claude.ai 请求访问）",
+    "ph": [
+      [
+        "mobile device",
+        "移动设备"
+      ],
+      [
+        "other devices",
+        "其他设备"
+      ],
+      [
+        "connected device",
+        "已连接设备"
+      ]
+    ],
+    "se": [
+      [
+        "Access other devices on your local network.",
+        "访问你局域网上的其他设备。"
+      ],
+      [
+        "This account is signed in on 3 devices.",
+        "该账号已在 3 台设备上登录。"
+      ]
+    ]
+  },
+  {
+    "w": "block",
+    "p": "/blɑːk/",
+    "zh": "(v.) 阻止；屏蔽；拦截；(n.) 块；街区",
+    "sc": "工作/IT",
+    "dct": "common",
+    "src": "macOS 局域网权限弹窗（claude.ai 请求访问）",
+    "ph": [
+      [
+        "Block",
+        "阻止（权限弹窗按钮）"
+      ],
+      [
+        "block a request",
+        "拦截请求"
+      ],
+      [
+        "block list",
+        "黑名单"
+      ]
+    ],
+    "se": [
+      [
+        "Block",
+        "阻止"
+      ],
+      [
+        "Click Block to deny local network access.",
+        "点「Block」拒绝局域网访问。"
+      ]
+    ]
+  },
+  {
+    "w": "allow",
+    "p": "/əˈlaʊ/",
+    "zh": "(v.) 允许；准许；给予权限",
+    "sc": "工作/IT",
+    "dct": "common",
+    "src": "macOS 局域网权限弹窗（claude.ai 请求访问）",
+    "ph": [
+      [
+        "Allow",
+        "允许（权限弹窗按钮）"
+      ],
+      [
+        "allow access",
+        "允许访问"
+      ],
+      [
+        "allowlist",
+        "白名单"
+      ]
+    ],
+    "se": [
+      [
+        "Allow",
+        "允许"
+      ],
+      [
+        "Click Allow to grant local network access.",
+        "点「Allow」授予局域网访问权限。"
+      ]
+    ]
+  },
+  {
+    "w": "cloak",
+    "p": "/kloʊk/",
+    "zh": "(n.) 披风；斗篷；遮盖物；(v.) 掩盖；隐藏；掩饰",
+    "sc": "AI工具/隐私",
+    "dct": "ai",
+    "src": "用户录入（拼写修正）",
+    "ph": [
+      [
+        "cloak one's identity 隐藏身份",
+        ""
+      ],
+      [
+        "cloaking device 隐形装置",
+        ""
+      ]
+    ],
+    "se": [
+      [
+        "The tool can cloak your real IP address from trackers.",
+        "该工具能向追踪器隐藏你的真实 IP 地址"
+      ]
+    ]
   }
 ];
 window.VOCAB_SCHED = {
@@ -7156,5 +7336,8 @@ window.VOCAB_SCHED = {
   ],
   "2026-09-09": [
     "codebase"
+  ],
+  "2026-09-13": [
+    "cloak"
   ]
 };
