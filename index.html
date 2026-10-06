@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#2563eb">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-180.png">
 <title>词力 · 每日英语练习</title>
 <style>
   :root{
@@ -232,7 +232,7 @@
   <div class="setrow col"><span>📤 自动回传</span>
     <div class="syncstat" id="ghTokStatus">未配置：未连接 GitHub（点击下方按钮在电脑上完成授权）</div>
     <div class="setrow col" style="margin-top:10px;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:10px">
-      <span>📡 回传仓库（隔离，填你自己的 GitHub）</span>
+      <span>📡 回传仓库（填你自己的 GitHub 实现隔离；旧用户未填时自动迁移到默认仓库，见上方状态提示）</span>
       <input class="typebox" id="ghOwnerInp" type="text" placeholder="GitHub 用户名（owner）" style="margin:4px 0">
       <input class="typebox" id="ghRepoInp" type="text" placeholder="仓库名（repo，如 vocab-pwa）" style="margin:4px 0">
       <div style="display:flex;gap:8px;margin:4px 0">
@@ -265,6 +265,10 @@
       <div style="font-size:12px;color:var(--sub);margin-top:2px">Token 只存在你这台设备的浏览器里，不会上传给任何人。在公共电脑用完后，记得点「删除 Token」清除残留。</div>
     </details>
   </div>
+  <div class="setrow col"><span>📥 导入词库（批量加词）</span>
+    <div style="font-size:12px;color:var(--sub);margin:2px 0">txt/csv 每行一条：<b>单词 中文</b> / <b>单词,中文</b> / <b>单词|中文</b>（只有英文也行，中文后补）；json＝桌面 vocab-progress.json。增量合并不抹旧释义。</div>
+    <button class="bigbtn" onclick="document.getElementById('imp').click()">选择文件导入</button>
+  </div>
   <div class="btnrow"><button class="bigbtn" onclick="backHome()">完成</button></div>
 </div>
 
@@ -287,8 +291,8 @@
 <div class="panel" id="pPhoto">
   <div class="quizhead"><span class="qt">📷 拍照收词</span><button class="bigbtn ghost" onclick="backHome()">← 返回</button></div>
   <div class="photo-tip">拍下含英文的界面/文档，自动提取英文单词，勾选要记的、补上中文，即可入词库。结果串复制发我，我合并进桌面词库并补全翻译。</div>
-  <input type="file" id="cam" accept="image/*" capture="environment" style="margin-bottom:10px">
-  <button class="bigbtn" id="ocrBtn" onclick="runOCR()" disabled>📸 选择图片后点此识别</button>
+<input type="file" id="cam" accept="image/*" capture="environment" onchange="onCamPick()" style="margin-bottom:10px">
+<button class="bigbtn" id="ocrBtn" onclick="runOCR()" disabled>📸 选择图片后点此识别</button>
   <div id="ocrStatus" style="color:var(--sub);font-size:13px;margin:8px 0"></div>
   <div id="photoTokens"></div>
   <div class="btnrow" id="photoActions" style="display:none">
@@ -565,8 +569,9 @@ function renderQuiz(){
     body=`<input class="typebox" id="qinp" placeholder="输入英文…" value="${answered?it.userAns:''}" ${answered?'disabled':''}>
       ${answered?`<div class="ans show ${correct?'ok':'no'}">${correct?'✓ 正确':'✗ 正确拼写：'+it.answer}</div>`:''}`;
   }
-  box.innerHTML=`<div class="qcard">${head}${body}</div>`;
+  box.innerHTML=`<div class="qcard">${head}${body}${answered?'<button class="bigbtn ghost" id="qredo" style="margin-top:10px">✏️ 重做本题</button>':''}</div>`;
   if(it.audio){const pa=document.getElementById('playAudio'); if(pa)pa.addEventListener('click',()=>speak(it.audio));}
+  const rd=document.getElementById('qredo'); if(rd)rd.addEventListener('click',qRedo);
   if(it.type==='choice'){ box.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>qChoose(parseInt(b.dataset.i)))); }
   else { const inp=document.getElementById('qinp'); if(inp){ inp.focus(); inp.addEventListener('keydown',e=>{if(e.key==='Enter')qSubmit();}); } }
   document.getElementById('qprog').textContent=`第 ${qcur+1} / ${QUIZ.length} 题`;
@@ -588,19 +593,22 @@ function qSubmit(){
   renderQuiz();
 }
 function qPrev(){ if(qcur>0){qcur--;renderQuiz();} }
+function qRedo(){ // 修 P11：回看已答题可重做（清空作答与判定，重新作答后按新答案计分）
+  const it=QUIZ[qcur]; it.userAns=(it.type==='choice')?null:''; it.revealed=false; renderQuiz();
+}
 function qNext(){
   const it=QUIZ[qcur];
   if(!it.revealed){
+    // 修 P10：实现真跳过——未答直接前进（计未答/错），与提示文案「或点下一题跳过」一致
     if(it.type==='input'){
       const inp=document.getElementById('qinp');
-      if(inp && inp.value.trim()!==''){
-        it.userAns=inp.value; it.revealed=true;
-        if(inp.value.trim().toLowerCase()===it.answer.toLowerCase()) feedbackGood();
-        renderQuiz();
-        document.getElementById('qnext').textContent=(qcur===QUIZ.length-1)?'提交并得分 ✓':'下一题 →';
-        // 捕获后继续走下方 advance/score 分支，避免最后一题不计分
-      } else { alert('当前题还没作答（写点什么都算）'); return; }
-    } else { alert('当前题还没作答（写点什么都算）'); return; }
+      const v=inp?inp.value.trim():'';
+      it.userAns=v; it.revealed=true;
+      if(v && v.toLowerCase()===it.answer.toLowerCase()) feedbackGood();
+    }else{
+      it.revealed=true; // 选择题未选＝跳过（userAns 保持 null，计错）
+    }
+    renderQuiz();
   }
   if(qcur<QUIZ.length-1){ qcur++; renderQuiz(); }
   else qScore();
@@ -621,6 +629,12 @@ async function qScore(){
   document.getElementById('scoreBig').style.color=pct>=80?'var(--ok)':pct>=60?'var(--warn)':'var(--bad)';
   document.getElementById('scoreSub').textContent=pct>=80?'掌握不错 👍':pct>=60?'还需巩固 💪':'多练几遍 🔁';
   const rl=document.getElementById('resultList'); rl.innerHTML='';
+  // 修 P18：PWA 原无「模糊」档 → 报告页点单词行可标/取消「模糊」，随 markedWeak 回传（进桌面薄弱词链路）
+  const fuzzy=new Set();
+  const result={date:todayStr(), level:qLevel, range:RANGE, reviewCompleted:right, wrongAnswers:wrong, markedWeak:[]};
+  const resync=()=>{ result.markedWeak=[...fuzzy]; autoSyncResult(result).then(r=>{
+    if(!r.ok) console.log('[模糊标记回传] 未推送：'+(r&&r.reason||'unknown'));
+  }); };
   QUIZ.forEach(it=>{
     const ok = it.type==='choice'
       ? (it.opts[it.userAns]===it.answer)
@@ -628,9 +642,17 @@ async function qScore(){
     const row=document.createElement('div'); row.className='rrow';
     row.innerHTML=`<span class="rtxt"><b>${it.type==='choice'?it.prompt||it.audio:it.prompt}</b> → ${ok?'<span style="color:var(--ok)">'+it.answer+'</span>':(it.userAns?it.userAns+'（应为 '+it.answer+'）':'(未答)')}</span>
       <span class="rtag ${ok?'tag-ok':'tag-no'}">${ok?'✓':'✗'}</span>`;
+    if(it.word){
+      row.style.cursor='pointer'; row.title='点击标记「模糊」（再点取消），自动回传进薄弱词';
+      row.addEventListener('click',()=>{
+        if(!it.word) return;
+        if(fuzzy.has(it.word)) fuzzy.delete(it.word); else fuzzy.add(it.word);
+        row.style.opacity=fuzzy.has(it.word)?'0.55':'1';
+        resync();
+      });
+    }
     rl.appendChild(row);
   });
-  const result={date:todayStr(), level:qLevel, range:RANGE, reviewCompleted:right, wrongAnswers:wrong};
   document.getElementById('result').value=JSON.stringify(result);
   const sync=await autoSyncResult(result);
   const se=document.getElementById('syncStatus');
@@ -659,7 +681,12 @@ function openSettings(){
   const ri=document.getElementById('ghRepoInp'); if(ri) ri.value=GH_REPO;
   const btn=document.getElementById('ghConnectBtn'), disc=document.getElementById('ghDiscBtn'), st=document.getElementById('ghTokStatus');
   if(btn && disc){
-    if(GH_TOKEN){ btn.style.display='none'; disc.style.display='inline-block'; if(st){st.textContent='✅ 已连接 GitHub（手机端零粘贴，自动同步）'; st.className='syncstat ok';} }
+    if(GH_TOKEN){ btn.style.display='none'; disc.style.display='inline-block';
+      // 修 P13：旧用户迁移到作者仓库时如实标注，消除「隔离」文案与实际目标不符
+      const migrated=(GH_OWNER==='w34459151-creator'&&GH_REPO==='vocab-pwa');
+      if(st){st.textContent=migrated
+        ?'✅ 已连接 GitHub（旧用户迁移：当前回传到作者仓库 w34459151-creator/vocab-pwa；如需隔离，请在下方填入你自己的仓库并保存）'
+        :'✅ 已连接 GitHub（手机端零粘贴，自动同步）'; st.className='syncstat ok';} }
     else { btn.style.display='inline-block'; disc.style.display='none'; if(st){st.textContent=GH_CLIENT_ID?'未连接（点击下方按钮在电脑上完成授权）':'❌ 未配置 OAuth App Client ID（请让 AI 重新部署）'; st.className=GH_CLIENT_ID?'syncstat':'syncstat no';} }
   }
   showPanel('setPanel');
@@ -668,23 +695,8 @@ function chGoal(d){ dailyGoal=Math.max(5,Math.min(30,dailyGoal+d)); saveMeta(); 
 function toggleStrict(v){ strictMode=v; saveMeta(); }
 function toggleSound(v){ soundOn=v; saveMeta(); }
 
-/* ===== 导入词库（桌面 vocab-progress.json） ===== */
-async function importLib(e){
-  const f=e.target.files[0]; if(!f)return;
-  try{
-    const txt=await f.text(); const j=JSON.parse(txt);
-    const words=(j.words||[]).map(d=>({w:d.word,p:d.phonetic||'',zh:(d.trans||[]).join('；'),
-      ph:(d.phrases||[]).map(s=>{const i=s.indexOf(' = ');return i>=0?[s.slice(0,i),s.slice(i+3)]:[s,''];}),
-      se:(d.sentences||[]).map(s=>[s.en,s.zh])}));
-    if(!words.length){alert('文件里没有 words');return;}
-    await dbSet('lib',words); await dbSet('sched',j.reviewSchedule||{});
-    LIB=words; SCHED=j.reviewSchedule||{}; rebuildMap(); buildPools();
-    alert('词库已导入（'+words.length+' 词），已覆盖本地数据。');
-    location.reload();
-  }catch(err){alert('导入失败：'+err.message);}
-}
-
 /* ===== 自动回传（GitHub Contents API，octokit 同款 REST；token 仅存本机 IndexedDB） ===== */
+/* 注：旧版「全量覆盖式 importLib」死代码已删（修 P9：双定义误改不生效陷阱）；现行导入见下方合并版 */
 let GH_OWNER='', GH_REPO='', GH_BRANCH='master';  // 回传目标改由用户在设置中配置（隔离）；旧用户首次打开自动迁移默认值
 const GH_CLIENT_ID = (window.GH_CLIENT_ID || '').trim();
 let GH_TOKEN='';
@@ -713,13 +725,25 @@ async function autoSyncResult(result){
   const rnd = (typeof crypto!=='undefined' && crypto.randomUUID) ? crypto.randomUUID().slice(0,8) : Math.floor(Math.random()*1e9).toString(36);
   const p='sync/'+todayStr()+'-'+Date.now()+'-'+rnd+'.json';
   try{
-    const r=await fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+p,{
-      method:'PUT',
-      headers:{'Authorization':'Bearer '+GH_TOKEN,'Content-Type':'application/json','Accept':'application/vnd.github+json'},
-      body:JSON.stringify({message:'sync result from 词力 PWA', content:b64u(JSON.stringify(result)), branch:GH_BRANCH})
-    });
+    // 修 P12：弱网裸 fetch 可长时间挂起 → 15s 超时中断，报告页及时给出失败提示
+    const ac=(typeof AbortController!=='undefined')?new AbortController():null;
+    const tm=ac?setTimeout(()=>ac.abort(),15000):null;
+    let r;
+    try{
+      r=await fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+p,{
+        method:'PUT',
+        headers:{'Authorization':'Bearer '+GH_TOKEN,'Content-Type':'application/json','Accept':'application/vnd.github+json'},
+        body:JSON.stringify({message:'sync result from 词力 PWA', content:b64u(JSON.stringify(result)), branch:GH_BRANCH}),
+        signal:ac?ac.signal:undefined
+      });
+    }finally{ if(tm)clearTimeout(tm); }
     return r.ok ? {ok:true, path:p} : {ok:false, reason:'HTTP '+r.status};
-  }catch(e){ return {ok:false, reason:(e&&e.message)||String(e)}; }
+  }catch(e){ return {ok:false, reason:(e&&e.name==='AbortError')?'timeout(15s)':((e&&e.message)||String(e))}; }
+}
+/* 收词自动回传（type:snipper → 桌面 sync-inbox 识别为扩展收藏，保留待 AI 补全入库） */
+async function pushSnipperWords(words){
+  if(!words || !words.length) return {ok:false, reason:'empty'};
+  return autoSyncResult({type:'snipper', date:todayStr(), source:'pwa', items:words.map(x=>({word:x.w||x.word, zh:x.zh||''}))});
 }
 function saveGHToken(){
   const inp=document.getElementById('ghTokInp'); const st=document.getElementById('ghTokStatus');
@@ -955,6 +979,11 @@ function evalSpeech(target, ev){
 
 /* ===== 拍照收词（Tesseract.js 本地 OCR） ===== */
 function openPhoto(){ showPanel('pPhoto'); }
+function onCamPick(){
+  const btn=document.getElementById('ocrBtn');
+  const has=document.getElementById('cam') && document.getElementById('cam').files.length>0;
+  if(btn){ btn.disabled=!has; btn.textContent=has?'🔍 点此识别图中英文':'📸 选择图片后点此识别'; }
+}
 function extractEnglish(text){
   const toks=(text||'').match(/[A-Za-z][A-Za-z'’-]*/g)||[];
   const set=new Set(); toks.forEach(t=>{ if(t.length>=2) set.add(t); });
@@ -962,17 +991,33 @@ function extractEnglish(text){
 }
 async function loadTesseract(){
   if(window.Tesseract) return window.Tesseract;
-  await new Promise((res,rej)=>{ const s=document.createElement('script');
-    s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
-    s.onload=res; s.onerror=()=>rej(new Error('Tesseract 加载失败（检查网络）')); document.head.appendChild(s); });
-  return window.Tesseract;
+  // 多 CDN 依次回退（jsdelivr 主源挂了/离线时自动换源，全部失败给出明确指引）
+  const cdns=[
+    'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js',
+    'https://fastly.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js',
+    'https://unpkg.com/tesseract.js@5/dist/tesseract.min.js'
+  ];
+  let lastErr=null;
+  for(const u of cdns){
+    try{
+      await new Promise((res,rej)=>{ const s=document.createElement('script');
+        s.src=u; s.onload=res; s.onerror=()=>rej(new Error('加载失败 '+u)); document.head.appendChild(s); });
+      if(window.Tesseract) return window.Tesseract;
+    }catch(e){ lastErr=e; }
+  }
+  throw new Error('OCR 引擎加载失败（当前离线或 CDN 均不可达）。可先用「手动输入/粘贴收词」，联网后重试拍照识别。');
 }
 async function runOCR(){
   const f=document.getElementById('cam').files[0]; if(!f){alert('先选图片');return;}
   const st=document.getElementById('ocrStatus'); st.textContent='识别中…（首次稍慢）';
   try{
     const T=await loadTesseract();
-    const {data:{text}}=await T.recognize(f,{lang:'eng'});
+    // 修 P5：首跑需下载 ~10MB 训练数据，用 logger 渲染阶段与百分比，替代静态「识别中…」
+    const {data:{text}}=await T.recognize(f,{lang:'eng', logger:m=>{
+      if(!m||!m.status) return;
+      if(m.status==='recognizing text') st.textContent='识别中 '+Math.round((m.progress||0)*100)+'%';
+      else if(/loading|initializ/i.test(m.status)) st.textContent='加载 OCR 引擎…（首次约 10MB，请稍候）';
+    }});
     showPhotoTokens(extractEnglish(text));
     st.textContent='识别完成，勾选要记的词：';
   }catch(e){ st.textContent='识别失败：'+(e&&e.message||e); }
@@ -982,9 +1027,10 @@ function showPhotoTokens(tokens){
   const box=document.getElementById('photoTokens'); box.innerHTML='';
   if(!tokens.length){ box.innerHTML='<div class="eval tip">没提取到英文单词，换个角度再拍</div>'; return; }
   tokens.forEach((t,i)=>{
+    const have=!!LIBMAP[t.toLowerCase()]; // 修 P7：已收录词不再默认勾选，置灰标注，避免误以为收了新词
     const row=document.createElement('div'); row.className='tok';
-    row.innerHTML=`<input type="checkbox" data-i="${i}" checked><span class="tw">${t}</span>
-      <input class="tzh" data-i="${i}" placeholder="中文意思（可空）"><span class="tscen">工作/AI工具</span>`;
+    row.innerHTML=`<input type="checkbox" data-i="${i}" ${have?'':'checked'} ${have?'disabled':''}><span class="tw" ${have?'style="opacity:.55"':''}>${t}</span>
+      ${have?'<span class="tscen">已收录</span>':'<input class="tzh" data-i="'+i+'" placeholder="中文意思（可空）"><span class="tscen">工作/AI工具</span>'}`;
     box.appendChild(row);
   });
   document.getElementById('photoActions').style.display='flex';
@@ -1006,6 +1052,11 @@ function addPhotoWords(){
   try{ dbSet('lib', LIB); }catch(e){}
   pendingAdd.push(...added.map(d=>({word:d.w, zh:d.zh})));
   showAddResult();
+  // 收词自动回传桌面（有 Token 时后台静默推 sync/*.json；失败不打断收词流程）
+  pushSnipperWords(added.map(d=>({w:d.w, zh:d.zh}))).then(r=>{
+    if(r && r.ok) console.log('[收词回传] 已推送到 GitHub：'+r.path);
+    else console.log('[收词回传] 未推送：'+(r&&r.reason||'unknown')+'（可稍后在设置里连 GitHub 后手动同步）');
+  });
   alert('已加入 '+added.length+' 个新词，去各关卡练练吧！');
 }
 function showAddResult(){
@@ -1051,12 +1102,26 @@ async function importLib(e){
     const existingKeys=new Set(LIB.map(d=>d.w.toLowerCase()));
     const trulyNew=newWords.filter(n=>n.w && !existingKeys.has(n.w.toLowerCase()));
     const map={}; LIB.forEach(d=>map[d.w.toLowerCase()]=d);
-    newWords.forEach(n=>{ if(n.w) map[n.w.toLowerCase()]=Object.assign({}, map[n.w.toLowerCase()]||{}, n); });
+    // 增量合并：新字段非空才覆盖，空串/空数组不抹掉已有释义（修 P4：导入空释义静默覆盖旧释义）
+    newWords.forEach(n=>{
+      if(!n.w) return;
+      const k=n.w.toLowerCase(), old=map[k];
+      if(!old){ map[k]=Object.assign({},n); return; }
+      ['p','zh','sc'].forEach(f=>{ if(n[f] && String(n[f]).trim()) old[f]=n[f]; });
+      if(n.ph && n.ph.length) old.ph=n.ph;
+      if(n.se && n.se.length) old.se=n.se;
+    });
     LIB=Object.values(map);
-    for(const k in newSched){ (SCHED[k]=SCHED[k]||[]).push(...newSched[k]); }
+    // 修 P8：重复导入同一文件时 SCHED 日期数组去重（原来 push 直接堆积造成数据膨胀）
+    for(const k in newSched){ const cur=new Set(SCHED[k]||[]); (newSched[k]||[]).forEach(d=>cur.add(d)); SCHED[k]=[...cur]; }
     rebuildMap(); buildPools(); refreshVer();
     try{ await dbSet('lib',LIB); await dbSet('sched',SCHED); }catch(err){}
-    if(trulyNew.length){ pendingAdd.push(...trulyNew.map(n=>({word:n.w,zh:n.zh}))); showAddResult(); }
+    if(trulyNew.length){ pendingAdd.push(...trulyNew.map(n=>({word:n.w,zh:n.zh}))); showAddResult();
+      pushSnipperWords(trulyNew.map(n=>({w:n.w, zh:n.zh}))).then(r=>{
+        if(r && r.ok) console.log('[导入回传] 已推送到 GitHub：'+r.path);
+        else console.log('[导入回传] 未推送：'+(r&&r.reason||'unknown'));
+      });
+    }
     alert('已导入 '+newWords.length+' 词（新增 '+trulyNew.length+'，本地共 '+LIB.length+' 词）。\n可复制收词结果串发我同步桌面。');
     if(e.target) e.target.value='';
   }catch(err){alert('导入失败：'+(err&&err.message||err)); if(e.target)e.target.value='';}
@@ -1067,12 +1132,13 @@ window.__h={
   get LIB(){return LIB}, get LIBMAP(){return LIBMAP}, get QUIZ(){return QUIZ}, get qcur(){return qcur},
   get DATA(){return DATA}, get streak(){return streak}, get dailyGoal(){return dailyGoal}, get DICT(){return DICT},
   get pendingAdd(){return pendingAdd}, get photoTokens(){return photoTokens},
-  setGHToken(t){GH_TOKEN=t||'';}, getGHToken(){return GH_TOKEN;}, autoSyncResult, b64u, saveGHRepo, testGHRepo,
-  goLevel, setRange, renderQuiz, backHome, openSettings, qChoose, qNext, qSubmit, qPrev, setRate, importLib,
-  parseImportText, extractEnglish, showPhotoTokens, addPhotoWords, openPhoto, openSpeak,
-  setSpeakTab, renderSpeakWords, toggleRecord, showAddResult,
+  setGHToken(t){GH_TOKEN=t||'';}, setGHRepo(o,r){GH_OWNER=o||'';GH_REPO=r||'';}, getGHToken(){return GH_TOKEN;}, autoSyncResult, b64u, saveGHRepo, testGHRepo,
+  goLevel, setRange, renderQuiz, backHome, openSettings, qChoose, qNext, qSubmit, qPrev, qRedo, qScore, setRate, importLib,
+  parseImportText, extractEnglish, showPhotoTokens, addPhotoWords, openPhoto, openSpeak, onCamPick, pushSnipperWords, loadTesseract,
+  setSpeakTab, renderSpeakWords, toggleRecord, showAddResult, runOCR,
   scenarios(){return [...new Set(LIB.map(d=>d.sc).filter(Boolean))];},
-  setPending(arr){pendingAdd=arr||[];}
+  setPending(arr){pendingAdd=arr||[];},
+  __setQuiz(a){QUIZ=a||[];}, __setQcur(n){qcur=n|0;}, __seedLib(a){LIB=a||[]; rebuildMap();}, get SCHED(){return SCHED;}, setSched(o){SCHED=o||{};}
 };
 
 /* ===== 初始化 ===== */
