@@ -290,9 +290,10 @@
 <!-- 拍照收词 -->
 <div class="panel" id="pPhoto">
   <div class="quizhead"><span class="qt">📷 拍照收词</span><button class="bigbtn ghost" onclick="backHome()">← 返回</button></div>
-  <div class="photo-tip">拍下含英文的界面/文档，自动提取英文单词，勾选要记的、补上中文，即可入词库。结果串复制发我，我合并进桌面词库并补全翻译。</div>
-<input type="file" id="cam" accept="image/*" capture="environment" onchange="onCamPick()" style="margin-bottom:10px">
-<button class="bigbtn" id="ocrBtn" onclick="runOCR()" disabled>📸 选择图片后点此识别</button>
+  <div class="photo-tip">拍下或从相册/文件选一张含英文的图，自动提取英文单词，勾选要记的、补上中文，即可入词库。微信里的文档：先「用其他应用打开」存到「文件」，或直接复制文本到「批量加词」粘贴。</div>
+<input type="file" id="cam" accept="image/*" capture="environment" onchange="onCamPick()" style="margin-bottom:6px">
+<input type="file" id="album" accept="image/*" onchange="onCamPick()" style="margin-bottom:10px">
+<button class="bigbtn" id="ocrBtn" onclick="runOCR()" disabled>📸 选图后点此识别</button>
   <div id="ocrStatus" style="color:var(--sub);font-size:13px;margin:8px 0"></div>
   <div id="photoTokens"></div>
   <div class="btnrow" id="photoActions" style="display:none">
@@ -981,8 +982,15 @@ function evalSpeech(target, ev){
 function openPhoto(){ showPanel('pPhoto'); }
 function onCamPick(){
   const btn=document.getElementById('ocrBtn');
-  const has=document.getElementById('cam') && document.getElementById('cam').files.length>0;
-  if(btn){ btn.disabled=!has; btn.textContent=has?'🔍 点此识别图中英文':'📸 选择图片后点此识别'; }
+  const has=getPickedFile()!=null;
+  if(btn){ btn.disabled=!has; btn.textContent=has?'🔍 点此识别图中英文':'📸 选图后点此识别'; }
+}
+// 拍照(#cam)与相册/文件(#album)任选其一，取最近选择的那个
+function getPickedFile(){
+  const a=document.getElementById('cam'), b=document.getElementById('album');
+  const fa=a&&a.files&&a.files[0], fb=b&&b.files&&b.files[0];
+  if(fa&&fb){ try{ return (fb.lastModified>=fa.lastModified)?fb:fa; }catch(e){ return fb||fa; } }
+  return fa||fb||null;
 }
 function extractEnglish(text){
   const toks=(text||'').match(/[A-Za-z][A-Za-z'’-]*/g)||[];
@@ -1008,7 +1016,7 @@ async function loadTesseract(){
   throw new Error('OCR 引擎加载失败（当前离线或 CDN 均不可达）。可先用「手动输入/粘贴收词」，联网后重试拍照识别。');
 }
 async function runOCR(){
-  const f=document.getElementById('cam').files[0]; if(!f){alert('先选图片');return;}
+  const f=getPickedFile(); if(!f){alert('先选图片（拍照或相册均可）');return;}
   const st=document.getElementById('ocrStatus'); st.textContent='识别中…（首次稍慢）';
   try{
     const T=await loadTesseract();
